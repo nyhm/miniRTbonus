@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:01:03 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/03 05:39:55 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:55:46 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,14 +301,6 @@ int is_empty_or_comment(char *line)
     if (line[i] == '\n')
         return 1;
     return 0;
-}
-
-size_t	count_array(char **arr)
-{
-	size_t count = 0;
-	while (arr[count])
-		count++;
-	return (count);
 }
 
 

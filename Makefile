@@ -6,7 +6,7 @@
 #    By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 14:46:21 by hnagashi          #+#    #+#              #
-#    Updated: 2025/06/06 08:05:06 by hnagashi         ###   ########.fr        #
+#    Updated: 2025/06/06 22:54:07 by hnagashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,13 @@ SRC = src/main.c src/utils/utils.c src/utils/utils2.c \
 		src/hit/hit.c src/hit/hit_cylinder.c \
 		src/key_hook/key_hook.c src/key_hook/key_hook_utils.c \
 		src/vec3/vec3.c src/vec3/vec3_utils.c src/vec3/vec3_basic.c 
-SRC_BONUS = src_bonus/main_bonus.c src_bonus/vec3_bonus.c src_bonus/ray_bonus.c src_bonus/hit_bonus.c src_bonus/parse_bonus.c src_bonus/render_bonus.c src_bonus/utils_bonus.c src_bonus/key_hook_bonus.c src_bonus/get_next_line_bonus.c src_bonus/key_hook_utils_bonus.c
+SRC_BONUS = src_bonus/main_bonus.c \
+		src_bonus/vec3/vec3_basic_bonus.c src_bonus/vec3/vec3_utils_bonus.c src_bonus/vec3/vec3_bonus.c \
+		src_bonus/ray_bonus.c src_bonus/hit/hit_bonus.c src_bonus/hit/hit_cylinder_bonus.c \
+		src_bonus/parse_bonus.c src_bonus/render_bonus.c \
+		src_bonus/utils/utils_bonus.c src_bonus/utils/utils2_bonus.c \
+		src_bonus/key_hook/key_hook_utils_bonus.c src_bonus/key_hook/key_hook_bonus.c \
+		src_bonus/get_next_line/get_next_line_bonus.c src_bonus/get_next_line/get_next_line_utils_bonus.c 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 

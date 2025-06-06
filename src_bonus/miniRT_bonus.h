@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/05 06:33:49 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:55:01 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,35 @@ typedef struct s_ray {//光線
     t_vec3 direction; // 光線の方向ベクトル（正規化されている想定）
 } t_ray;
 
+typedef struct s_quadratic
+{
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		sqrt_discriminant;
+	double		t0;
+	double		t1;
+}				t_quadratic;
+
+typedef struct s_cylinder_hit
+{
+	t_cylinder	*cy;
+	t_ray		ray;
+	double		*t_candidates;
+	int			count;
+}				t_cylinder_hit;
+
+typedef struct s_cap_hit
+{
+	t_vec3		center;
+	t_vec3		normal;
+	double		radius;
+	t_ray		ray;
+	double		*t_candidates;
+	int			count;
+}				t_cap_hit;
+
 
 typedef struct s_camera
 {
@@ -109,6 +138,19 @@ typedef struct s_sphere {//球
     t_color color; 
     int checkerboard; // チェッカーボードの有無（1: 有効, 0: 無効）
 } t_sphere;
+
+
+typedef struct s_sphere_hit
+{
+	t_sphere	*sphere;
+	t_ray		ray;
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		t1;
+	double		t2;
+}				t_sphere_hit;
 
 typedef struct s_ambient {//環境光
     double brightness; // 環境光の明るさ（0.0〜1.0）
@@ -201,7 +243,6 @@ void dispatch_parse(t_scene *scene, char **tokens);
 t_color parse_color(char *str);
 // render.c
 void render(t_data *data);
-size_t	count_array(char **arr);
 
 // utils.c
 void free_split(char **arr);
@@ -224,5 +265,62 @@ void			move_height(t_data *data, int keycode);
 void			fov_key(t_data *data, int keycode);
 // get_next_line.c
 char	*get_next_line(int fd);
+
+int		select_closest_hit(double *t_candidates, int count, double *t_hit);
+int		check_side_hit(t_cylinder_hit *hit, double t_side);
+void	calc_cylinder_quadratic(t_cylinder_hit *hit, t_quadratic *q);
+int		hit_cylinder_side(t_cylinder_hit *hit);
+int		check_cap_hit(t_cap_hit *info);
+
+int	hit_cylinder(t_cylinder *cy, t_ray ray, double *t_hit);
+int	hit_plane(t_plane *pl, t_ray ray, double *t_hit);
+int	calc_sphere_quadratic(t_sphere_hit *hit);
+int	hit_sphere(t_sphere *sphere, t_ray ray, double *t_hit);
+int	hit_cylinder_caps(t_cylinder_hit *hit);
+
+char	*ft_get_line(char *left_str);
+char	*get_next_line(int fd);
+char	*ft_read_to_left_str(int fd, char *left_str);
+char	*ft_new_left_str(char *left_str);
+
+char	*ft_error_read(char *buff);
+char	*ft_error_join(char *left_str, char *buff);
+
+t_vec3	vec_add(t_vec3 a, t_vec3 b);
+t_vec3	vec_sub(t_vec3 a, t_vec3 b);
+t_vec3	vec_mul(t_vec3 v, double t);
+double	vec_dot(t_vec3 a, t_vec3 b);
+
+t_vec3	vec_rotate(t_vec3 v, t_vec3 r, double theta);
+t_vec3	vec_reflect(t_vec3 I, t_vec3 N);
+t_vec3	parse_vec3(const char *str);
+t_vec3	vec_normalize(t_vec3 v);
+
+t_vec3	vec3(double x, double y, double z);
+double	vec_len2(t_vec3 v);
+t_vec3	vec_scale(t_vec3 v, double s);
+t_vec3	vec_cross(t_vec3 a, t_vec3 b);
+
+void	rotate_camera_yaw(t_camera *cam, double angle);
+void	rotate_camera_pitch(t_camera *cam, double angle);
+void	arrow_keys(t_data *data, int keycode);
+void	move_forward(t_data *data, int keycode);
+void	move_side(t_data *data, int keycode);
+
+void	move_height(t_data *data, int keycode);
+void	fov_key(t_data *data, int keycode);
+int		keyhook(int keycode, t_data *data);
+int		close_window(void *param);
+
+void	ft_atof2(char *str, int i, double *res, double *divisor);
+double	ft_atof(char *str);
+void	ft_error(const char *msg);
+int		ft_count_words(const char *str, char delim);
+
+size_t	count_array(char **arr);
+void	ft_write(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+void	free_split(char **arr);
+int		ft_isspace(int c);
 
 #endif

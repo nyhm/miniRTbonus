@@ -6,11 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:30:36 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/05 06:32:43 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:48:17 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT_bonus.h"
+#include "../miniRT_bonus.h"
+
+void	move_height(t_data *data, int keycode);
+void	fov_key(t_data *data, int keycode);
+int		keyhook(int keycode, t_data *data);
+int		close_window(void *param);
 
 void	move_height(t_data *data, int keycode)
 {
@@ -68,8 +73,6 @@ int	keyhook(int keycode, t_data *data)
 		move_height(data, keycode);
 	else if (keycode == KEY_Q || keycode == KEY_E)
 		fov_key(data, keycode);
-	else
-		printf("デバック用Other key pressed: %d\n", keycode);
 	render(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);

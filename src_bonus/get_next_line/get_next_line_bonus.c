@@ -6,31 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 18:45:21 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/03 06:21:27 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:36:39 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT_bonus.h"
+#include "../miniRT_bonus.h"
 
 char	*ft_get_line(char *left_str);
 char	*get_next_line(int fd);
 char	*ft_read_to_left_str(int fd, char *left_str);
 char	*ft_new_left_str(char *left_str);
-
-char *ft_error_read(char *buff)
-{
-	write(2, "Error reading file\n", 19);
-		free(buff);
-	return (NULL);
-}
-
-char *ft_error_join(char *left_str, char *buff)
-{
-	write(2, "Error joining strings\n", 22);
-	free(buff);
-	free(left_str);
-	return (NULL);
-}
 
 char	*ft_read_to_left_str(int fd, char *left_str)
 {
@@ -46,7 +31,7 @@ char	*ft_read_to_left_str(int fd, char *left_str)
 	{
 		rd_bytes = read(fd, buff, BUFFER_SIZE);
 		if (rd_bytes == -1)
-		    return(ft_error_read(buff));
+			return (ft_error_read(buff));
 		buff[rd_bytes] = '\0';
 		tmp = ft_strjoin(left_str, buff);
 		if (!tmp)

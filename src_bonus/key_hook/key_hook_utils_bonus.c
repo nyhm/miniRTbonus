@@ -6,11 +6,17 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 07:55:47 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/05 06:33:16 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/06 22:48:19 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../miniRT_bonus.h"
+
+void	rotate_camera_yaw(t_camera *cam, double angle);
+void	rotate_camera_pitch(t_camera *cam, double angle);
+void	arrow_keys(t_data *data, int keycode);
+void	move_forward(t_data *data, int keycode);
+void	move_side(t_data *data, int keycode);
 
 void	rotate_camera_yaw(t_camera *cam, double angle)
 {
