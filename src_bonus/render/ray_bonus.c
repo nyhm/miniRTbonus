@@ -6,7 +6,7 @@
 /*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:25 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:11:09 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:58:47 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ t_color	trace_ray(t_ray ray, t_data *data)
 		}
 	}
 	else
-		final = record.color;
+		final = color_scale(color_mul(record.color, data->scene->ambient.color),
+				data->scene->ambient.brightness);
 	return (final);
 }
 
