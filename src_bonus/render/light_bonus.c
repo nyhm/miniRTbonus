@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   light_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 07:51:46 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 17:48:46 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:11:51 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-static void		calculate_ambient(t_color base, t_ambient ambient,
+static void		calculate_ambient(t_color base, t_ambient ambient, \
 					t_color_double *color_d);
-static void		calculate_diffuse_specular(t_hit_record record, t_light light,
+static void		calculate_diffuse_specular(t_hit_record record, t_light light, \
 					t_data *data, t_color_double *color_d);
 static t_color	finalize_color(t_color_double color_d);
+// t_color			apply_lighting(t_hit_record record, t_light light, \
+// 					t_data *data);
+// void			light_set(t_color *dest, t_color src);
 
-static void	calculate_ambient(t_color base, t_ambient ambient,
+static void	calculate_ambient(t_color base, t_ambient ambient, \
 		t_color_double *color_d)
 {
 	color_d->r = base.r * ambient.brightness * ambient.color.r / 255.0;
@@ -26,7 +29,7 @@ static void	calculate_ambient(t_color base, t_ambient ambient,
 	color_d->b = base.b * ambient.brightness * ambient.color.b / 255.0;
 }
 
-static void	calculate_diffuse_specular(t_hit_record record, t_light light,
+static void	calculate_diffuse_specular(t_hit_record record, t_light light, \
 		t_data *data, t_color_double *color_d)
 {
 	t_vec3			light_dir;
@@ -35,18 +38,18 @@ static void	calculate_diffuse_specular(t_hit_record record, t_light light,
 	t_light_calc	calc;
 
 	light_dir = vec_normalize(vec_sub(light.pos, record.hit_point));
-	view_dir = vec_normalize(vec_sub(data->scene->camera.pos,
+	view_dir = vec_normalize(vec_sub(data->scene->camera.pos, \
 				record.hit_point));
 	calc.diffuse_strength = fmax(vec_dot(record.normal, light_dir), 0.0);
 	calc.specular_strength = 0.5;
 	calc.shininess = 64.0;
 	reflect_dir = vec_reflect(vec_mul(light_dir, -1), record.normal);
 	calc.spec = pow(fmax(vec_dot(view_dir, reflect_dir), 0.0), calc.shininess);
-	color_d->r += record.color.r * calc.diffuse_strength * light.brightness
+	color_d->r += record.color.r * calc.diffuse_strength * light.brightness \
 		* light.color.r / 255.0;
-	color_d->g += record.color.g * calc.diffuse_strength * light.brightness
+	color_d->g += record.color.g * calc.diffuse_strength * light.brightness \
 		* light.color.g / 255.0;
-	color_d->b += record.color.b * calc.diffuse_strength * light.brightness
+	color_d->b += record.color.b * calc.diffuse_strength * light.brightness \
 		* light.color.b / 255.0;
 	color_d->r += calc.specular_strength * calc.spec * light.color.r;
 	color_d->g += calc.specular_strength * calc.spec * light.color.g;

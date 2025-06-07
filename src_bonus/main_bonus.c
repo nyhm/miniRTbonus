@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:10 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:02:19 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:48:20 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT_bonus.h"
 
 static void	init_data(t_data *data);
+//void		free_data(t_data *data);
 static void	print_controls(void);
+//int			main(int argc, char **argv);
 
 static void	init_data(t_data *data)
 {
