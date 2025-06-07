@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:50 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:01:43 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:43:36 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
+
+// t_vec3	vec_rotate(t_vec3 v, t_vec3 r, double theta);
+// t_vec3	vec_reflect(t_vec3 I, t_vec3 N);
+// t_vec3	parse_vec3(const char *str);
+// t_vec3	vec_normalize(t_vec3 v);
 
 t_vec3	vec_rotate(t_vec3 v, t_vec3 r, double theta)
 {
@@ -23,8 +28,8 @@ t_vec3	vec_rotate(t_vec3 v, t_vec3 r, double theta)
 	sin_t = sin(theta);
 	dot = vec_dot(r, v);
 	cross = vec_cross(r, v);
-	return ((t_vec3){v.x * cos_t + cross.x * sin_t + r.x * dot * (1 - cos_t),
-		v.y * cos_t + cross.y * sin_t + r.y * dot * (1 - cos_t), v.z * cos_t
+	return ((t_vec3){v.x * cos_t + cross.x * sin_t + r.x * dot * (1 - cos_t), \
+		v.y * cos_t + cross.y * sin_t + r.y * dot * (1 - cos_t), v.z * cos_t \
 		+ cross.z * sin_t + r.z * dot * (1 - cos_t)});
 }
 

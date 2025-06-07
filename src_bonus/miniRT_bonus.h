@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:59:33 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:53:49 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+/* ************************************************************************** */
 # define WIDTH 800
 # define HEIGHT 600
 # define BUFFER_SIZE 42
@@ -45,40 +46,41 @@
 # define NUM_THREADS 16
 # define SAMPLES 1
 
+/* ************************************************************************** */
 typedef struct s_cy_coord
 {
 	double		height;
 	double		angle;
 }				t_cy_coord;
-
+/* ************************************************************************** */
 typedef struct s_cy_checkerboard_scale
 {
 	double		height;
 	double		angle;
 	double		bottom;
 }				t_cy_checkerboard_scale;
-
+/* ************************************************************************** */
 typedef struct s_vec3
 {
 	double		x;
 	double		y;
 	double		z;
 }				t_vec3;
-
+/* ************************************************************************** */
 typedef struct s_color_double
 {
 	double		r;
 	double		g;
 	double		b;
 }				t_color_double;
-
+/* ************************************************************************** */
 typedef struct s_color
 {
 	int			r;
 	int			g;
 	int			b;
 }				t_color;
-
+/* ************************************************************************** */
 typedef struct s_plane
 {
 	t_vec3		point;
@@ -86,13 +88,13 @@ typedef struct s_plane
 	t_color		color;
 	int			checkerboard;
 }				t_plane;
-
+/* ************************************************************************** */
 typedef struct s_ray
 {
 	t_vec3		origin;
 	t_vec3		direction;
 }				t_ray;
-
+/* ************************************************************************** */
 typedef struct s_cylinder
 {
 	t_vec3		center;
@@ -102,7 +104,7 @@ typedef struct s_cylinder
 	t_color		color;
 	int			checkerboard;
 }				t_cylinder;
-
+/* ************************************************************************** */
 typedef struct s_quadratic
 {
 	double		a;
@@ -113,7 +115,7 @@ typedef struct s_quadratic
 	double		t0;
 	double		t1;
 }				t_quadratic;
-
+/* ************************************************************************** */
 typedef struct s_cylinder_hit
 {
 	t_cylinder	*cy;
@@ -121,7 +123,7 @@ typedef struct s_cylinder_hit
 	double		*t_candidates;
 	int			count;
 }				t_cylinder_hit;
-
+/* ************************************************************************** */
 typedef struct s_cap_hit
 {
 	t_vec3		center;
@@ -131,7 +133,7 @@ typedef struct s_cap_hit
 	double		*t_candidates;
 	int			count;
 }				t_cap_hit;
-
+/* ************************************************************************** */
 typedef struct s_camera
 {
 	t_vec3		pos;
@@ -144,14 +146,14 @@ typedef struct s_camera
 	t_vec3		horizontal;
 	t_vec3		vertical;
 }				t_camera;
-
+/* ************************************************************************** */
 typedef struct s_light
 {
 	t_vec3		pos;
 	double		brightness;
 	t_color		color;
 }				t_light;
-
+/* ************************************************************************** */
 typedef struct s_sphere
 {
 	t_vec3		center;
@@ -159,7 +161,7 @@ typedef struct s_sphere
 	t_color		color;
 	int			checkerboard;
 }				t_sphere;
-
+/* ************************************************************************** */
 typedef struct s_sphere_hit
 {
 	t_sphere	*sphere;
@@ -171,13 +173,13 @@ typedef struct s_sphere_hit
 	double		t1;
 	double		t2;
 }				t_sphere_hit;
-
+/* ************************************************************************** */
 typedef struct s_ambient
 {
 	double		brightness;
 	t_color		color;
 }				t_ambient;
-
+/* ************************************************************************** */
 typedef struct s_scene
 {
 	t_ambient	ambient;
@@ -195,7 +197,7 @@ typedef struct s_scene
 	int			background_color;
 	int			anti_aliasing;
 }				t_scene;
-
+/* ************************************************************************** */
 typedef struct s_data
 {
 	void		*mlx;
@@ -212,7 +214,7 @@ typedef struct s_data
 	int			fov_key;
 	t_scene		*scene;
 }				t_data;
-
+/* ************************************************************************** */
 typedef struct s_light_calc
 {
 	double		diffuse_strength;
@@ -220,7 +222,7 @@ typedef struct s_light_calc
 	double		shininess;
 	double		spec;
 }				t_light_calc;
-
+/* ************************************************************************** */
 typedef struct s_hit_record
 {
 	t_ray		ray;
@@ -232,7 +234,7 @@ typedef struct s_hit_record
 	t_vec3		hit_point;
 	t_color		color;
 }				t_hit_record;
-
+/* ************************************************************************** */
 typedef struct s_coord
 {
 	int			x;
@@ -242,7 +244,7 @@ typedef struct s_coord
 	double		px;
 	double		py;
 }				t_coord;
-
+/* ************************************************************************** */
 typedef struct s_thread_data
 {
 	int			start_y;
@@ -250,6 +252,7 @@ typedef struct s_thread_data
 	t_data		*data;
 }				t_thread_data;
 
+/* ************************************************************************** */
 // get_next_line_bonus.c
 char			*get_next_line(int fd);
 
@@ -257,6 +260,7 @@ char			*get_next_line(int fd);
 char			*ft_error_read(char *buff);
 char			*ft_error_join(char *left_str, char *buff);
 
+/* ************************************************************************** */
 // hit_bonus.c
 int				hit_sphere(t_sphere *sphere, t_ray ray, double *t_hit);
 int				hit_cylinder(t_cylinder *cy, t_ray ray, double *t_hit);
@@ -268,6 +272,7 @@ int				select_closest_hit(double *t_candidates, int count,
 int				hit_cylinder_side(t_cylinder_hit *hit);
 int				check_cap_hit(t_cap_hit *info);
 
+/* ************************************************************************** */
 // key_hook_bonus.c
 int				keyhook(int keycode, t_data *data);
 int				close_window(void *param);
@@ -277,6 +282,7 @@ void			arrow_keys(t_data *data, int keycode);
 void			move_forward(t_data *data, int keycode);
 void			move_side(t_data *data, int keycode);
 
+/* ************************************************************************** */
 // parse_ambient.c
 void			parse_ambient(t_scene *scene, char ***tokens);
 
@@ -303,6 +309,7 @@ void			parse_plane(t_scene *scene, char ***tokens);
 void			set_s_checker(t_sphere *s, char ***tokens);
 void			parse_sphere(t_scene *scene, char ***tokens);
 
+/* ************************************************************************** */
 // checker_bonus.c
 t_color			opposite_color(t_color c);
 t_color			get_checkerboard_color(t_hit_record *record, t_plane *pl,
@@ -335,6 +342,7 @@ void			render(t_data *data);
 // shadow_bonus.c
 int				is_in_shadow(t_vec3 point, t_light light, t_data *data);
 
+/* ************************************************************************** */
 // utils_bonus.c
 size_t			count_array(char **arr);
 void			ft_write(const char *str);
@@ -352,6 +360,7 @@ int				ft_count_words(const char *str, char delim);
 t_color			color_scale(t_color color, double scale);
 t_color			color_mul(t_color a, t_color b);
 
+/* ************************************************************************** */
 // vec3_basic_bonus.c
 t_vec3			vec_add(t_vec3 a, t_vec3 b);
 t_vec3			vec_sub(t_vec3 a, t_vec3 b);
@@ -370,6 +379,7 @@ double			vec_len2(t_vec3 v);
 t_vec3			vec_scale(t_vec3 v, double s);
 t_vec3			vec_cross(t_vec3 a, t_vec3 b);
 
+/* ************************************************************************** */
 // main_bonus.c
 void			free_data(t_data *data);
 #endif
