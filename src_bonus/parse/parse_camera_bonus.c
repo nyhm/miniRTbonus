@@ -6,13 +6,23 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:02:30 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:41:00 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
 static void	camera_token(t_scene *scene, char ***tokens);
+
+static void	check_camera_token(t_scene *scene)
+{
+	if (!is_unit_vector(scene->camera.dir))
+		ft_error("Error: orientation vector is not normalized\n");
+	if (vec_len2(scene->camera.dir) == 0)
+		ft_error("Error: camera direction cannot be zero vector\n");
+	if (scene->camera.fov <= 0 || scene->camera.fov >= 180)
+		ft_error("Error: camera FOV must be between 0 and 180 degrees\n");
+}
 
 static void	camera_token(t_scene *scene, char ***tokens)
 {
@@ -33,12 +43,9 @@ void	parse_camera(t_scene *scene, char ***tokens)
 
 	camera_token(scene, tokens);
 	scene->camera.pos = parse_vec3((*tokens)[1]);
-	scene->camera.dir = vec_normalize(parse_vec3((*tokens)[2]));
+	scene->camera.dir = parse_vec3((*tokens)[2]);
 	scene->camera.fov = ft_atof((*tokens)[3]);
-	if (vec_len2(scene->camera.dir) == 0)
-		ft_error("Error: camera direction cannot be zero vector\n");
-	if (scene->camera.fov <= 0 || scene->camera.fov >= 180)
-		ft_error("Error: camera FOV must be between 0 and 180 degrees\n");
+	check_camera_token(scene);
 	scene->camera.aspect_ratio = (double)WIDTH / HEIGHT;
 	world_up = (t_vec3){0, 1, 0};
 	if (fabs(vec_dot(scene->camera.dir, world_up)) > 0.999)

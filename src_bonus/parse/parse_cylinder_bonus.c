@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:54:09 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:41:12 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	set_c_checker(t_cylinder *cy, char ***tokens)
 
 static void	cy_check(t_cylinder cy)
 {
+	if (!is_unit_vector(cy.direction))
+		ft_error("Error: orientation vector is not normalized\n");
 	if (vec_len2(cy.direction) == 0)
 		ft_error("Error: cylinder direction cannot be zero vector\n");
 	if (cy.radius <= 0)
@@ -79,7 +81,7 @@ void	parse_cylinder(t_scene *scene, char ***tokens)
 		|| ft_isspace((*tokens)[5][0]))
 		ft_error("Error: invalid cylinder line\n");
 	cy.center = parse_vec3((*tokens)[1]);
-	cy.direction = vec_normalize(parse_vec3((*tokens)[2]));
+	cy.direction = parse_vec3((*tokens)[2]);
 	cy.radius = atof((*tokens)[3]) / 2.0;
 	cy.height = atof((*tokens)[4]);
 	cy.color = parse_color((*tokens)[5]);

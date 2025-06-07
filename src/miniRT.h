@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:01:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:52:37 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:25:46 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,6 @@ void			sp_token(t_scene *scene, char ***tokens, size_t count_tokens);
 
 // parse.c
 t_color			parse_color(char *str);
-int				is_empty_or_comment(char *line);
 void			dispatch_parse(t_scene *scene, char **tokens);
 void			parse_rt_file(const char *filename, t_scene *scene);
 
@@ -348,6 +347,12 @@ int				ft_count_words(const char *str, char delim);
 // utils3.c
 t_color			color_scale(t_color color, double scale);
 t_color			color_mul(t_color a, t_color b);
+int				is_strict_integer(const char *str);
+int				is_empty_or_comment(char *line);
+int				has_rt_extension(const char *filename);
+
+// utils4.c
+int				is_unit_vector(t_vec3 vec3);
 
 // vec3_basic.c
 t_vec3			vec_add(t_vec3 a, t_vec3 b);

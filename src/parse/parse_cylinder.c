@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:47:57 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:37:10 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	new_cy(t_scene *scene, t_cylinder cy);
 
 void	cy_check(t_cylinder cy)
 {
+	if (!is_unit_vector(cy.direction))
+		ft_error("Error: orientation vector is not normalized\n");
 	if (vec_len2(cy.direction) == 0)
 		ft_error("Error: cylinder direction cannot be zero vector\n");
 	if (cy.radius <= 0)
@@ -31,7 +33,7 @@ void	new_cy(t_scene *scene, t_cylinder cy)
 {
 	t_cylinder	*new_arr;
 	size_t		new_count;
-	
+
 	cy_check(cy);
 	new_count = scene->cylinder_count + 1;
 	new_arr = malloc(sizeof(t_cylinder) * new_count);
@@ -43,8 +45,8 @@ void	new_cy(t_scene *scene, t_cylinder cy)
 	ft_memset(new_arr, 0, sizeof(t_cylinder) * new_count);
 	if (scene->cylinders)
 	{
-		ft_memcpy(new_arr, scene->cylinders, sizeof(t_cylinder) \
-		* scene->cylinder_count);
+		ft_memcpy(new_arr, scene->cylinders, sizeof(t_cylinder)
+			* scene->cylinder_count);
 		free(scene->cylinders);
 	}
 	new_arr[scene->cylinder_count] = cy;
@@ -56,12 +58,12 @@ void	parse_cylinder(t_scene *scene, char **tokens)
 {
 	t_cylinder	cy;
 
-	if (!tokens[1] || !tokens[2] || !tokens[3] || !tokens[4] || !tokens[5] || \
-		ft_isspace(tokens[1][0]) || ft_isspace(tokens[2][0]) || \
-		ft_isspace(tokens[4][0]) || ft_isspace(tokens[5][0]))
+	if (!tokens[1] || !tokens[2] || !tokens[3] || !tokens[4] || !tokens[5]
+		|| ft_isspace(tokens[1][0]) || ft_isspace(tokens[2][0])
+		|| ft_isspace(tokens[4][0]) || ft_isspace(tokens[5][0]))
 		ft_error("Error: invalid cylinder line\n");
 	cy.center = parse_vec3(tokens[1]);
-	cy.direction = vec_normalize(parse_vec3(tokens[2]));
+	cy.direction = parse_vec3(tokens[2]);
 	cy.radius = atof(tokens[3]) / 2.0;
 	cy.height = atof(tokens[4]);
 	cy.color = parse_color(tokens[5]);

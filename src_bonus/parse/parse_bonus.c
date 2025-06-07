@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:52 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:10:48 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:49:05 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,24 @@
 #include <stdbool.h>
 
 // t_color		parse_color(char *str);
-static int	is_empty_or_comment(char *line);
 static void	dispatch_parse(t_scene *scene, char **tokens);
 static void	parse_line(char *line, t_scene *scene);
 // void		parse_rt_file(const char *filename, t_scene *scene);
+
+void	check_color_token(char **rgb_tokens)
+{
+	if (count_array(rgb_tokens) != 3)
+	{
+		free_split(rgb_tokens);
+		ft_error("Error: color must have exactly 3 values (r,g,b)\n");
+	}
+	if (!is_strict_integer(rgb_tokens[0]) || !is_strict_integer(rgb_tokens[1])
+		|| !is_strict_integer(rgb_tokens[2]))
+	{
+		free_split(rgb_tokens);
+		ft_error("Error: color values must be integers with no characters\n");
+	}
+}
 
 t_color	parse_color(char *str)
 {
@@ -28,11 +42,7 @@ t_color	parse_color(char *str)
 	rgb_tokens = ft_split(str, ',');
 	if (!rgb_tokens)
 		return (color);
-	if (!rgb_tokens[0] || !rgb_tokens[1] || !rgb_tokens[2])
-	{
-		free_split(rgb_tokens);
-		ft_error("Error: color values (r, g, b) must be between 0 and 255\n");
-	}
+	check_color_token(rgb_tokens);
 	color.r = ft_atoi(rgb_tokens[0]);
 	color.g = ft_atoi(rgb_tokens[1]);
 	color.b = ft_atoi(rgb_tokens[2]);
@@ -46,41 +56,22 @@ t_color	parse_color(char *str)
 	return (color);
 }
 
-static int	is_empty_or_comment(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	if (line[i] == '\0')
-		return (1);
-	if (line[i] == '#')
-		return (1);
-	if (line[i] == '\n')
-		return (1);
-	return (0);
-}
-
 static void	dispatch_parse(t_scene *scene, char **tokens)
 {
-	while (*tokens)
-	{
-		if (ft_strcmp(tokens[0], "A") == 0)
-			parse_ambient(scene, &tokens);
-		else if (ft_strcmp(tokens[0], "C") == 0)
-			parse_camera(scene, &tokens);
-		else if (ft_strcmp(tokens[0], "L") == 0)
-			parse_light(scene, &tokens);
-		else if (ft_strcmp(tokens[0], "sp") == 0)
-			parse_sphere(scene, &tokens);
-		else if (ft_strcmp(tokens[0], "pl") == 0)
-			parse_plane(scene, &tokens);
-		else if (ft_strcmp(tokens[0], "cy") == 0)
-			parse_cylinder(scene, &tokens);
-		else
-			tokens++;
-	}
+	if (ft_strcmp(tokens[0], "A") == 0)
+		parse_ambient(scene, &tokens);
+	else if (ft_strcmp(tokens[0], "C") == 0)
+		parse_camera(scene, &tokens);
+	else if (ft_strcmp(tokens[0], "L") == 0)
+		parse_light(scene, &tokens);
+	else if (ft_strcmp(tokens[0], "sp") == 0)
+		parse_sphere(scene, &tokens);
+	else if (ft_strcmp(tokens[0], "pl") == 0)
+		parse_plane(scene, &tokens);
+	else if (ft_strcmp(tokens[0], "cy") == 0)
+		parse_cylinder(scene, &tokens);
+	else
+		ft_error("Error: invalid identifier\n");
 }
 
 static void	parse_line(char *line, t_scene *scene)
@@ -120,6 +111,8 @@ void	parse_rt_file(const char *filename, t_scene *scene)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (scene->camera_count == 0)
+		ft_error("Error: scene must contain one camera\n");
 	close(fd);
 	if (!has_read)
 		ft_error("Error: file is empty or not readable\n");

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+         #
+#    By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 14:46:21 by hnagashi          #+#    #+#              #
-#    Updated: 2025/06/07 20:11:57 by samatsum         ###   ########.fr        #
+#    Updated: 2025/06/07 23:35:35 by hnagashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
 
-SRC = src/main.c src/utils/utils.c src/utils/utils2.c src/utils/utils3.c\
+SRC = src/main.c src/utils/utils.c src/utils/utils2.c src/utils/utils3.c src/utils/utils4.c\
 		src/render/ray.c src/render/render.c src/render/find.c src/render/shadow.c src/render/light.c\
 		src/parse/parse.c src/parse/parse_ambient.c src/parse/parse_camera.c \
 		src/parse/parse_cylinder.c src/parse/parse_light.c src/parse/parse_plane.c src/parse/parse_sphere.c \
@@ -33,7 +33,7 @@ SRC_BONUS = src_bonus/main_bonus.c \
 		src_bonus/hit/hit_bonus.c src_bonus/hit/hit_cylinder_bonus.c \
 		src_bonus/parse/parse_bonus.c src_bonus/parse/parse_sphere_bonus.c src_bonus/parse/parse_light_bonus.c \
 		src_bonus/parse/parse_plane_bonus.c src_bonus/parse/parse_camera_bonus.c src_bonus/parse/parse_cylinder_bonus.c src_bonus/parse/parse_ambient_bonus.c\
-		src_bonus/utils/utils_bonus.c src_bonus/utils/utils2_bonus.c src_bonus/utils/utils3_bonus.c \
+		src_bonus/utils/utils_bonus.c src_bonus/utils/utils2_bonus.c src_bonus/utils/utils3_bonus.c src_bonus/utils/utils4_bonus.c \
 		src_bonus/key_hook/key_hook_utils_bonus.c src_bonus/key_hook/key_hook_bonus.c \
 		src_bonus/get_next_line/get_next_line_bonus.c src_bonus/get_next_line/get_next_line_utils_bonus.c \
 

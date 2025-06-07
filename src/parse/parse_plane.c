@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:50:29 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:40:20 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	new_plane(t_scene *scene, t_plane plane)
 	size_t	new_count;
 	t_plane	*new_arr;
 
+	if (!is_unit_vector(plane.normal))
+		ft_error("Error: orientation vector is not normalized\n");
 	if (vec_len2(plane.normal) == 0)
 		ft_error("Error: plane normal cannot be zero vector\n");
 	new_count = scene->plane_count + 1;
@@ -49,7 +51,7 @@ void	parse_plane(t_scene *scene, char **tokens)
 		|| ft_isspace(tokens[2][0]) || ft_isspace(tokens[3][0]))
 		ft_error("Error: invalid plane line\n");
 	plane.point = parse_vec3(tokens[1]);
-	plane.normal = vec_normalize(parse_vec3(tokens[2]));
+	plane.normal = parse_vec3(tokens[2]);
 	plane.color = parse_color(tokens[3]);
 	new_plane(scene, plane);
 }

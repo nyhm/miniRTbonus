@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:10 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:45:00 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:00:21 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	main(int argc, char **argv)
 		write(2, "Usage: ./miniRT <scene.rt>\n", 27);
 		return (1);
 	}
+	if (!has_rt_extension(argv[1]))
+		ft_error("Error: file must have a .rt extension\n");
 	ft_memset(&scene, 0, sizeof(scene));
 	parse_rt_file(argv[1], &scene);
 	ft_memset(&data, 0, sizeof(data));

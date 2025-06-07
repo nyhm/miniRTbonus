@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:57:40 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:34:58 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,6 +327,7 @@ t_color			apply_lighting(t_hit_record record, t_light light,
 					t_data *data);
 
 // ray_bonus.c
+void			find_closest_intersection(t_data *data, t_hit_record *record);
 t_ray			create_ray(t_vec3 origin, t_vec3 direction);
 t_ray			generate_camera_ray(t_data *data, t_coord coord);
 t_color			trace_ray(t_ray ray, t_data *data);
@@ -355,7 +356,12 @@ int				ft_count_words(const char *str, char delim);
 // utils3.c
 t_color			color_scale(t_color color, double scale);
 t_color			color_mul(t_color a, t_color b);
-void			find_closest_intersection(t_data *data, t_hit_record *record);
+int				is_strict_integer(const char *str);
+int				has_rt_extension(const char *filename);
+int				is_empty_or_comment(char *line);
+
+// utils4.c
+int				is_unit_vector(t_vec3 vec3);
 
 /* ************************************************************************** */
 // vec3_basic_bonus.c
