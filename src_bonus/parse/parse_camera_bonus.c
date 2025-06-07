@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 02:05:19 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 06:07:12 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ static void	camera_token(t_scene *scene, char ***tokens)
 		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0])
 		|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid camera line\n");
+	if ((*tokens)[4] && !ft_isspace((*tokens)[4][0]))
+	{
+		ft_putstr_fd("Error: invalid texture identifier for Camera: ", 2);
+		ft_putendl_fd((*tokens)[4], 2);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	parse_camera(t_scene *scene, char ***tokens)
