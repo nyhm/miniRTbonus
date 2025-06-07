@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   checker_cy_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 14:05:30 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:01:52 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:07:39 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-static int	is_cylinder_bottom_checkerboard(t_vec3 point, t_cylinder *cy,
+static int	is_cylinder_bottom_checkerboard(t_vec3 point, t_cylinder *cy, \
 				double scale);
 static int	is_cylinder_checkerboard(t_vec3 point, t_cylinder *cy);
+//t_color		get_cylinder_checker_color(t_vec3 point, t_cylinder *cy);
 
-static int	is_cylinder_bottom_checkerboard(t_vec3 point, t_cylinder *cy,
+static int	is_cylinder_bottom_checkerboard(t_vec3 point, t_cylinder *cy, \
 		double scale)
 {
 	t_vec3	bottom_center;

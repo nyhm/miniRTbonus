@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:46:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:01:53 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:08:02 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_color	opposite_color(t_color c);
 t_color	get_checkerboard_color(t_hit_record *record, t_plane *pl, double scale);
-t_color	get_sphere_checker_color(t_hit_record *record, t_sphere *s,
+t_color	get_sphere_checker_color(t_hit_record *record, t_sphere *s, \
 			double scale);
 
 t_color	opposite_color(t_color c)
@@ -50,7 +50,7 @@ t_color	get_checkerboard_color(t_hit_record *record, t_plane *pl, double scale)
 		return (opposite_color(record->color));
 }
 
-t_color	get_sphere_checker_color(t_hit_record *record, t_sphere *s,
+t_color	get_sphere_checker_color(t_hit_record *record, t_sphere *s, \
 		double scale)
 {
 	t_vec3	p_centered;
