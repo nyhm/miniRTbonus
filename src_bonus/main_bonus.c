@@ -6,7 +6,7 @@
 /*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:10 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 18:48:20 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:44:39 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_data(t_data *data)
 	if (!data->win)
 		ft_error("Error: mlx_new_window failed\n");
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_length,
+	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_length, \
 			&data->endian);
 	if (!data->addr)
 		ft_error("Error: mlx_get_data_addr failed\n");
