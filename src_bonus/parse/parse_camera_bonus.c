@@ -6,16 +6,15 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 12:54:06 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:02:30 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-void	parse_camera(t_scene *scene, char ***tokens);
-void	camera_token(t_scene *scene, char ***tokens);
+static void	camera_token(t_scene *scene, char ***tokens);
 
-void	camera_token(t_scene *scene, char ***tokens)
+static void	camera_token(t_scene *scene, char ***tokens)
 {
 	if (scene->camera_count++)
 		ft_error("Error: duplicate camera\n");

@@ -6,16 +6,11 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:50 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:44:30 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:01:43 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
-
-t_vec3	vec_rotate(t_vec3 v, t_vec3 r, double theta);
-t_vec3	vec_reflect(t_vec3 I, t_vec3 N);
-t_vec3	parse_vec3(const char *str);
-t_vec3	vec_normalize(t_vec3 v);
 
 t_vec3	vec_rotate(t_vec3 v, t_vec3 r, double theta)
 {

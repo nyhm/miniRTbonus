@@ -6,18 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:30:36 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:48:17 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:45:28 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-void	move_height(t_data *data, int keycode);
-void	fov_key(t_data *data, int keycode);
-int		keyhook(int keycode, t_data *data);
-int		close_window(void *param);
+static void	move_height(t_data *data, int keycode);
+static void	fov_key(t_data *data, int keycode);
 
-void	move_height(t_data *data, int keycode)
+static void	move_height(t_data *data, int keycode)
 {
 	if (keycode == KEY_SPACE)
 	{
@@ -35,7 +33,7 @@ void	move_height(t_data *data, int keycode)
 	}
 }
 
-void	fov_key(t_data *data, int keycode)
+static void	fov_key(t_data *data, int keycode)
 {
 	if (keycode == KEY_Q)
 	{

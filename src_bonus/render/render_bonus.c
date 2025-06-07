@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:47:06 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 11:07:39 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:08:49 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-void	put_pixel(t_data *data, int x, int y, t_color color);
-void	render_pixel(t_data *data, t_coord coord);
-void	*render_thread(void *arg);
-void	render(t_data *data);
+static void	put_pixel(t_data *data, int x, int y, t_color color);
+static void	render_pixel(t_data *data, t_coord coord);
+static void	*render_thread(void *arg);
 
-void	put_pixel(t_data *data, int x, int y, t_color color)
+void	find_closest_intersection(t_data *data, t_hit_record *record)
+{
+	find_closest_plane(data, record);
+	find_closest_sphere(data, record);
+	find_closest_cylinder(data, record);
+}
+
+static void	put_pixel(t_data *data, int x, int y, t_color color)
 {
 	char	*dst;
 	int		pixel;
@@ -29,7 +35,7 @@ void	put_pixel(t_data *data, int x, int y, t_color color)
 	*(unsigned int *)dst = pixel;
 }
 
-void	render_pixel(t_data *data, t_coord coord)
+static void	render_pixel(t_data *data, t_coord coord)
 {
 	t_color	color;
 	t_ray	ray;
@@ -57,7 +63,7 @@ void	render_pixel(t_data *data, t_coord coord)
 	put_pixel(data, coord.x, coord.y, final_color);
 }
 
-void	*render_thread(void *arg)
+static void	*render_thread(void *arg)
 {
 	t_thread_data	*td;
 	t_coord			coord;

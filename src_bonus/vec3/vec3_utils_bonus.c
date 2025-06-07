@@ -6,16 +6,11 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:27:12 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:44:27 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:01:40 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
-
-t_vec3	vec3(double x, double y, double z);
-double	vec_len2(t_vec3 v);
-t_vec3	vec_scale(t_vec3 v, double s);
-t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 
 t_vec3	vec3(double x, double y, double z)
 {

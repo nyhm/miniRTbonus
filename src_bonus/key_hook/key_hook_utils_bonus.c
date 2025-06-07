@@ -6,19 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 07:55:47 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:48:19 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:07:15 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-void	rotate_camera_yaw(t_camera *cam, double angle);
-void	rotate_camera_pitch(t_camera *cam, double angle);
-void	arrow_keys(t_data *data, int keycode);
-void	move_forward(t_data *data, int keycode);
-void	move_side(t_data *data, int keycode);
+static void	rotate_camera_yaw(t_camera *cam, double angle);
+static void	rotate_camera_pitch(t_camera *cam, double angle);
 
-void	rotate_camera_yaw(t_camera *cam, double angle)
+static void	rotate_camera_yaw(t_camera *cam, double angle)
 {
 	t_vec3	world_up;
 
@@ -32,7 +29,7 @@ void	rotate_camera_yaw(t_camera *cam, double angle)
 	cam->up = vec_normalize(vec_cross(cam->right, cam->dir));
 }
 
-void	rotate_camera_pitch(t_camera *cam, double angle)
+static void	rotate_camera_pitch(t_camera *cam, double angle)
 {
 	cam->dir = vec_normalize(vec_rotate(cam->dir, cam->right, angle));
 	cam->up = vec_normalize(vec_cross(cam->right, cam->dir));

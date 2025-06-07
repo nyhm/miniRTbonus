@@ -6,16 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 10:57:34 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:32:38 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-void	set_p_checker(t_plane *p, char ***tokens);
-void	plane_check(t_plane plane);
-void	new_plane(t_scene *scene, t_plane plane);
-void	parse_plane(t_scene *scene, char ***tokens);
+void		set_p_checker(t_plane *p, char ***tokens);
+static void	plane_check(t_plane plane);
+static void	new_plane(t_scene *scene, t_plane plane);
+void		parse_plane(t_scene *scene, char ***tokens);
 
 void	set_p_checker(t_plane *p, char ***tokens)
 {
@@ -32,7 +32,7 @@ void	set_p_checker(t_plane *p, char ***tokens)
 	}
 }
 
-void	plane_check(t_plane plane)
+static void	plane_check(t_plane plane)
 {
 	if (vec_len2(plane.normal) == 0)
 		ft_error("Error: plane normal cannot be zero vector\n");
@@ -45,7 +45,7 @@ void	plane_check(t_plane plane)
 		ft_error("Error: plane color values must be between 0 and 255\n");
 }
 
-void	new_plane(t_scene *scene, t_plane plane)
+static void	new_plane(t_scene *scene, t_plane plane)
 {
 	size_t	new_count;
 	t_plane	*new_arr;

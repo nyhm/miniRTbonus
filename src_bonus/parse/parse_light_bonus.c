@@ -6,15 +6,13 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:02:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 10:57:30 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:48:57 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-void	light_check(t_light light);
-void	new_light(t_scene *scene, t_light light);
-void	parse_light(t_scene *scene, char ***tokens);
+static void	new_light(t_scene *scene, t_light light);
 
 void	light_check(t_light light)
 {
@@ -28,7 +26,7 @@ void	light_check(t_light light)
 		ft_error("Error: light color values must be between 0 and 255\n");
 }
 
-void	new_light(t_scene *scene, t_light light)
+static void	new_light(t_scene *scene, t_light light)
 {
 	t_light	*new_arr;
 	size_t	new_count;

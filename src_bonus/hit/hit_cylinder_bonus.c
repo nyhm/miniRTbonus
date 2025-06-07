@@ -6,19 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 06:32:32 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:37:09 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:44:36 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-int		select_closest_hit(double *t_candidates, int count, double *t_hit);
-int		check_side_hit(t_cylinder_hit *hit, double t_side);
-void	calc_cylinder_quadratic(t_cylinder_hit *hit, t_quadratic *q);
-int		hit_cylinder_side(t_cylinder_hit *hit);
-int		check_cap_hit(t_cap_hit *info);
+static int	check_side_hit(t_cylinder_hit *hit, double t_side);
+static void	calc_cylinder_quadratic(t_cylinder_hit *hit, t_quadratic *q);
 
-int	check_side_hit(t_cylinder_hit *hit, double t_side)
+static int	check_side_hit(t_cylinder_hit *hit, double t_side)
 {
 	t_vec3	p;
 	double	h;
@@ -57,7 +54,7 @@ int	select_closest_hit(double *t_candidates, int count, double *t_hit)
 	return (1);
 }
 
-void	calc_cylinder_quadratic(t_cylinder_hit *hit, t_quadratic *q)
+static void	calc_cylinder_quadratic(t_cylinder_hit *hit, t_quadratic *q)
 {
 	t_vec3	ca;
 	t_vec3	oc;

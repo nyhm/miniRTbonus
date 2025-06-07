@@ -6,16 +6,15 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:52 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 12:21:17 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:47:09 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-t_color	parse_color(char *str);
-int		is_empty_or_comment(char *line);
-void	dispatch_parse(t_scene *scene, char **tokens);
-void	parse_rt_file(const char *filename, t_scene *scene);
+static int	is_empty_or_comment(char *line);
+static void	dispatch_parse(t_scene *scene, char **tokens);
+static void	parse_line(char *line, t_scene *scene);
 
 t_color	parse_color(char *str)
 {
@@ -39,7 +38,7 @@ t_color	parse_color(char *str)
 	return (color);
 }
 
-int	is_empty_or_comment(char *line)
+static int	is_empty_or_comment(char *line)
 {
 	int	i;
 
@@ -55,7 +54,7 @@ int	is_empty_or_comment(char *line)
 	return (0);
 }
 
-void	dispatch_parse(t_scene *scene, char **tokens)
+static void	dispatch_parse(t_scene *scene, char **tokens)
 {
 	while (*tokens)
 	{
@@ -76,7 +75,7 @@ void	dispatch_parse(t_scene *scene, char **tokens)
 	}
 }
 
-void	parse_line(char *line, t_scene *scene)
+static void	parse_line(char *line, t_scene *scene)
 {
 	char	**tokens;
 

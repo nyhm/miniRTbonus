@@ -6,14 +6,14 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 07:51:46 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 07:59:58 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:31:30 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-static void		calculate_ambient(t_color base, t_light light,
-					double ambient_strength, t_color_double *color_d);
+static void		calculate_ambient(t_color base, t_ambient ambient,
+					t_color_double *color_d);
 static void		calculate_diffuse_specular(t_hit_record record, t_light light,
 					t_data *data, t_color_double *color_d);
 static t_color	finalize_color(t_color_double color_d);
@@ -21,12 +21,12 @@ void			light_set(t_color *dest, t_color src);
 t_color			apply_lighting(t_hit_record record, t_light light,
 					t_data *data);
 
-static void	calculate_ambient(t_color base, t_light light,
-		double ambient_strength, t_color_double *color_d)
+static void	calculate_ambient(t_color base, t_ambient ambient,
+		t_color_double *color_d)
 {
-	color_d->r = base.r * ambient_strength * light.color.r / 255.0;
-	color_d->g = base.g * ambient_strength * light.color.g / 255.0;
-	color_d->b = base.b * ambient_strength * light.color.b / 255.0;
+	color_d->r = base.r * ambient.brightness * ambient.color.r / 255.0;
+	color_d->g = base.g * ambient.brightness * ambient.color.g / 255.0;
+	color_d->b = base.b * ambient.brightness * ambient.color.b / 255.0;
 }
 
 static void	calculate_diffuse_specular(t_hit_record record, t_light light,
@@ -75,11 +75,9 @@ static t_color	finalize_color(t_color_double color_d)
 t_color	apply_lighting(t_hit_record record, t_light light, t_data *data)
 {
 	t_color_double	color_d;
-	double			ambient_strength;
 
-	ambient_strength = data->scene->ambient.brightness;
 	color_d = (t_color_double){0, 0, 0};
-	calculate_ambient(record.color, light, ambient_strength, &color_d);
+	calculate_ambient(record.color, data->scene->ambient, &color_d);
 	if (!is_in_shadow(record.hit_point, light, data))
 		calculate_diffuse_specular(record, light, data, &color_d);
 	return (finalize_color(color_d));

@@ -6,13 +6,11 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:00:35 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 11:59:28 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:46:19 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
-
-void	parse_ambient(t_scene *scene, char ***tokens);
 
 void	parse_ambient(t_scene *scene, char ***tokens)
 {

@@ -6,18 +6,21 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 07:42:08 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 11:13:01 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:01:46 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-int	is_shadow_plane(t_vec3 point, t_light light, t_data *data, double t_hit);
-int	is_shadow_sphere(t_vec3 point, t_light light, t_data *data, double t_hit);
-int	is_shadow_cylinder(t_vec3 point, t_light light, t_data *data, double t_hit);
-int	is_in_shadow(t_vec3 point, t_light light, t_data *data);
+static int	is_shadow_plane(t_vec3 point, t_light light, t_data *data,
+				double t_hit);
+static int	is_shadow_sphere(t_vec3 point, t_light light, t_data *data,
+				double t_hit);
+static int	is_shadow_cylinder(t_vec3 point, t_light light, t_data *data,
+				double t_hit);
 
-int	is_shadow_plane(t_vec3 point, t_light light, t_data *data, double t_hit)
+static int	is_shadow_plane(t_vec3 point, t_light light, t_data *data,
+		double t_hit)
 {
 	t_vec3	light_dir;
 	double	light_distance;
@@ -38,7 +41,8 @@ int	is_shadow_plane(t_vec3 point, t_light light, t_data *data, double t_hit)
 	return (0);
 }
 
-int	is_shadow_sphere(t_vec3 point, t_light light, t_data *data, double t_hit)
+static int	is_shadow_sphere(t_vec3 point, t_light light, t_data *data,
+		double t_hit)
 {
 	t_vec3	light_dir;
 	double	light_distance;
@@ -59,7 +63,8 @@ int	is_shadow_sphere(t_vec3 point, t_light light, t_data *data, double t_hit)
 	return (0);
 }
 
-int	is_shadow_cylinder(t_vec3 point, t_light light, t_data *data, double t_hit)
+static int	is_shadow_cylinder(t_vec3 point, t_light light, t_data *data,
+		double t_hit)
 {
 	t_vec3	light_dir;
 	double	light_distance;

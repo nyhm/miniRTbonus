@@ -6,17 +6,11 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:15:00 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 10:58:27 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:00:12 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
-
-size_t	count_array(char **arr);
-void	ft_write(const char *str);
-int		ft_strcmp(const char *s1, const char *s2);
-void	free_split(char **arr);
-int		ft_isspace(int c);
 
 size_t	count_array(char **arr)
 {

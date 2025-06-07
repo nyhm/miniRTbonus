@@ -6,18 +6,17 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 18:45:21 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:36:39 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:42:50 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-char	*ft_get_line(char *left_str);
-char	*get_next_line(int fd);
-char	*ft_read_to_left_str(int fd, char *left_str);
-char	*ft_new_left_str(char *left_str);
+static char	*ft_get_line(char *left_str);
+static char	*ft_read_to_left_str(int fd, char *left_str);
+static char	*ft_new_left_str(char *left_str);
 
-char	*ft_read_to_left_str(int fd, char *left_str)
+static char	*ft_read_to_left_str(int fd, char *left_str)
 {
 	char	*buff;
 	int		rd_bytes;
@@ -58,7 +57,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-char	*ft_get_line(char *left_str)
+static char	*ft_get_line(char *left_str)
 {
 	int		i;
 	char	*str;
@@ -86,7 +85,7 @@ char	*ft_get_line(char *left_str)
 	return (str);
 }
 
-char	*ft_new_left_str(char *left_str)
+static char	*ft_new_left_str(char *left_str)
 {
 	int		i;
 	int		j;

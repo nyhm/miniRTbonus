@@ -6,15 +6,13 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 12:54:29 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:47:44 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-void	cy_check(t_cylinder cy);
-void	parse_cylinder(t_scene *scene, char ***tokens);
-void	new_cy(t_scene *scene, t_cylinder cy);
+static void	new_cy(t_scene *scene, t_cylinder cy);
 
 void	set_c_checker(t_cylinder *cy, char ***tokens)
 {
@@ -44,7 +42,7 @@ void	cy_check(t_cylinder cy)
 		ft_error("Error: cylinder height must be greater than 0\n");
 }
 
-void	new_cy(t_scene *scene, t_cylinder cy)
+static void	new_cy(t_scene *scene, t_cylinder cy)
 {
 	t_cylinder	*new_arr;
 	size_t		new_count;

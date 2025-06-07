@@ -6,19 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:38 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:37:06 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 15:43:53 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-int	hit_cylinder(t_cylinder *cy, t_ray ray, double *t_hit);
-int	hit_plane(t_plane *pl, t_ray ray, double *t_hit);
-int	calc_sphere_quadratic(t_sphere_hit *hit);
-int	hit_sphere(t_sphere *sphere, t_ray ray, double *t_hit);
-int	hit_cylinder_caps(t_cylinder_hit *hit);
+static int	calc_sphere_quadratic(t_sphere_hit *hit);
+static int	hit_cylinder_caps(t_cylinder_hit *hit);
 
-int	hit_cylinder_caps(t_cylinder_hit *hit)
+static int	hit_cylinder_caps(t_cylinder_hit *hit)
 {
 	t_cap_hit	info;
 
@@ -57,7 +54,7 @@ int	hit_cylinder(t_cylinder *cy, t_ray ray, double *t_hit)
 	return (select_closest_hit(hit.t_candidates, hit.count, t_hit));
 }
 
-int	calc_sphere_quadratic(t_sphere_hit *hit)
+static int	calc_sphere_quadratic(t_sphere_hit *hit)
 {
 	t_vec3	oc;
 

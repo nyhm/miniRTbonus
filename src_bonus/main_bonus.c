@@ -6,11 +6,14 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:10 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 11:55:32 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:02:19 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT_bonus.h"
+
+static void	init_data(t_data *data);
+static void	print_controls(void);
 
 static void	init_data(t_data *data)
 {
@@ -51,7 +54,7 @@ void	free_data(t_data *data)
 		free(data->scene->cylinders);
 }
 
-void	print_controls(void)
+static void	print_controls(void)
 {
 	ft_write("=== 操作ガイド ===\n");
 	ft_write("\n移動\n");
