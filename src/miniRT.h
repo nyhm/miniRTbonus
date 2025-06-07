@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:01:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 08:55:03 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:57:59 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,10 @@ void			ft_atof2(char *str, int i, double *res, double *divisor);
 double			ft_atof(char *str);
 void			ft_error(const char *msg);
 int				ft_count_words(const char *str, char delim);
+
+// utils3.c
+t_color			color_scale(t_color color, double scale);
+t_color			color_mul(t_color a, t_color b);
 
 // vec3_basic.c
 t_vec3			vec_add(t_vec3 a, t_vec3 b);
