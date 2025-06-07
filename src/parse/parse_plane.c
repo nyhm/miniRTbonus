@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 02:04:25 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 03:43:12 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ void	parse_plane(t_scene *scene, char **tokens)
 	if (!tokens[1] || !tokens[2] || !tokens[3] || ft_isspace(tokens[1][0])
 		|| ft_isspace(tokens[2][0]) || ft_isspace(tokens[3][0]))
 		ft_error("Error: invalid plane line\n");
+	if (tokens[4] && !ft_isspace(tokens[4][0]))
+	{
+		ft_putstr_fd("Error: invalid texture identifier for plane: ", 2);
+		ft_putendl_fd(tokens[4], 2);
+		exit(EXIT_FAILURE);
+	}
 	plane.point = parse_vec3(tokens[1]);
 	plane.normal = parse_vec3(tokens[2]);
 	plane.color = parse_color(tokens[3]);

@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 02:03:58 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 03:41:35 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ void	camera_token(t_scene *scene, char ***tokens, size_t count_tokens)
 		ft_error("Error: duplicate camera\n");
 	if (count_tokens < 4)
 		ft_error("Error: invalid camera line\n");
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || \
+		ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0]) || \
+		ft_isspace((*tokens)[3][0]))
+		ft_error("Error: invalid camera line\n");
+	if ((*tokens)[4] && !ft_isspace((*tokens)[4][0]))
+	{
+		ft_putstr_fd("Error: invalid texture identifier for camera: ", 2);
+		ft_putendl_fd((*tokens)[4], 2);
+		exit(EXIT_FAILURE);
+	}
 	parse_camera(scene, *tokens);
 }
 
@@ -39,9 +49,6 @@ void	parse_camera(t_scene *scene, char **tokens)
 	t_vec3	world_up;
 	double	half_height;
 
-	if (!tokens[1] || !tokens[2] || !tokens[3] || ft_isspace(tokens[1][0])
-		|| ft_isspace(tokens[2][0]) || ft_isspace(tokens[3][0]))
-		ft_error("Error: invalid camera line\n");
 	scene->camera.pos = parse_vec3(tokens[1]);
 	scene->camera.dir = parse_vec3(tokens[2]);
 	scene->camera.fov = ft_atof(tokens[3]);

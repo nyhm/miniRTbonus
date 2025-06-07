@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 02:53:23 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 03:29:35 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	set_c_checker(t_cylinder *cy, char ***tokens)
 	if ((*tokens)[6] && (ft_strcmp((*tokens)[6], "checkerboard") == 0
 			|| ft_strcmp((*tokens)[6], "checkerboard\n") == 0))
 		cy->checkerboard = 1;
-	else if ((*tokens)[6])
+	else if ((*tokens)[6] && !ft_isspace((*tokens)[6][0]))
 	{
 		ft_putstr_fd("Error: invalid texture identifier for cylinder: ", 2);
 		ft_putendl_fd((*tokens)[6], 2);

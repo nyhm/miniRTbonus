@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 02:04:33 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 03:40:14 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ void	parse_cylinder(t_scene *scene, char **tokens)
 		|| ft_isspace(tokens[1][0]) || ft_isspace(tokens[2][0])
 		|| ft_isspace(tokens[4][0]) || ft_isspace(tokens[5][0]))
 		ft_error("Error: invalid cylinder line\n");
+	if (tokens[6] && !ft_isspace(tokens[6][0]))
+	{
+		ft_putstr_fd("Error: invalid texture identifier for cylinder: ", 2);
+		ft_putendl_fd(tokens[6], 2);
+		exit(EXIT_FAILURE);
+	}
 	cy.center = parse_vec3(tokens[1]);
 	cy.direction = parse_vec3(tokens[2]);
 	cy.radius = atof(tokens[3]) / 2.0;
