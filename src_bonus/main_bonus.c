@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:10 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/02 21:53:07 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:24:27 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static void init_data(t_data *data)
         ft_error("Error: mlx_get_data_addr failed\n");
     data->width = WIDTH;
     data->height = HEIGHT;
-    data->is_rendered = 0;
-    data->frame_count = 0;
     data->scene = NULL;
     data->zoom_key = 0;
     data->camera_key = 0;

@@ -6,79 +6,89 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 22:55:01 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 10:22:57 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_BONUS_H
 #define MINIRT_BONUS_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h> //デバック用
-#include <time.h>//デバック用
-#include <sys/time.h> //デバック用
-#include <math.h>
-#include <mlx.h>
-#include <fcntl.h>
-#include "../libft/libft.h"
-#include <pthread.h>
+# include "../libft/libft.h"
+# include <fcntl.h>
+# include <math.h>
+# include <mlx.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#define WIDTH 800
-#define HEIGHT 600
-#define BUFFER_SIZE 42
-#define MOVE_SPEED 1
-#define ROTATE_SPEED 0.3 // カメラの回転速度
-#define KEY_ESC 65307 // Escキー
-#define KEY_UP 65362 // 上矢印キー
-#define KEY_DOWN 65364 // 下矢印キー
-#define KEY_LEFT 65361 // 左矢印キー
-#define KEY_RIGHT 65363 // 右矢印キー
-#define KEY_W 119 // Wキー
-#define KEY_S 115 // Sキー
-#define KEY_A 97 // Aキー
-#define KEY_D 100 // Dキー
-#define KEY_Q 113 // Qキー
-#define KEY_E 101 // Eキー
-#define KEY_SPACE 32 // スペースキー
-#define KEY_CTRL 65507 // Ctrlキー
-#define KEY_CTRL2 65508// Ctrlキー
+# define WIDTH 800
+# define HEIGHT 600
+# define BUFFER_SIZE 42
+# define MOVE_SPEED 1
+# define ROTATE_SPEED 0.3
+# define KEY_ESC 65307
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_Q 113
+# define KEY_E 101
+# define KEY_SPACE 32
+# define KEY_CTRL 65508
+# define KEY_CTRL2 65507
 
-#define NUM_THREADS 16
-#define SAMPLES 1
+# define NUM_THREADS 16
+# define SAMPLES 1
 
+typedef struct s_vec3
+{
+	double		x;
+	double		y;
+	double		z;
+}				t_vec3;
 
+typedef struct s_color_double
+{
+	double		r;
+	double		g;
+	double		b;
+}				t_color_double;
 
-typedef struct s_vec3 {//3次元ベクトル
-    double x, y, z;
-} t_vec3;
+typedef struct s_color
+{
+	int			r;
+	int			g;
+	int			b;
+}				t_color;
 
-typedef struct s_color {//色
-    int r; // 赤成分 (0-255)
-    int g; // 緑成分 (0-255)
-    int b; // 青成分 (0-255)
-} t_color;
+typedef struct s_plane
+{
+	t_vec3		point;
+	t_vec3		normal;
+	t_color		color;
+	int			checkerboard;
+}				t_plane;
 
-typedef struct s_plane {//平面
-    t_vec3 point;     // 平面上の1点
-    t_vec3 normal;    // 法線ベクトル（正規化されている想定）
-    t_color color; 
-    int checkerboard; // チェッカーボードの有無（1: 有効, 0: 無効）
-} t_plane;
+typedef struct s_ray
+{
+	t_vec3		origin;
+	t_vec3		direction;
+}				t_ray;
 
-typedef struct s_cylinder {//円柱
-    t_vec3 center;    // 底面中心
-    t_vec3 direction; // 方向ベクトル（正規化されている想定）
-    double radius;    // 半径
-    double height;    // 高さ
-    t_color color; 
-    int checkerboard; // チェッカーボードの有無（1: 有効, 0: 無効）
-} t_cylinder;
-
-typedef struct s_ray {//光線
-    t_vec3 origin;    // 光線の始点
-    t_vec3 direction; // 光線の方向ベクトル（正規化されている想定）
-} t_ray;
+typedef struct s_cylinder
+{
+	t_vec3		center;
+	t_vec3		direction;
+	double		radius;
+	double		height;
+	t_color		color;
+	int			checkerboard;
+}				t_cylinder;
 
 typedef struct s_quadratic
 {
@@ -109,36 +119,33 @@ typedef struct s_cap_hit
 	int			count;
 }				t_cap_hit;
 
-
 typedef struct s_camera
 {
-    t_vec3 pos;       // カメラの位置
-    t_vec3 dir;      // 視線の方向（正規化ベクトル）
-    t_vec3 up;             // 上方向（正規化ベクトル）
-    t_vec3 right;          // 右方向（direction × up）
+	t_vec3		pos;
+	t_vec3		dir;
+	t_vec3		up;
+	t_vec3		right;
+	double		fov;
+	double		aspect_ratio;
+	t_vec3		screen_center;
+	t_vec3		horizontal;
+	t_vec3		vertical;
+}				t_camera;
 
-    double fov;            // 視野角（ラジアン）
-    double aspect_ratio;   // アスペクト比（例：16.0 / 9.0）
+typedef struct s_light
+{
+	t_vec3		pos;
+	double		brightness;
+	t_color		color;
+}				t_light;
 
-    t_vec3 screen_center;  // カメラの前方にあるスクリーンの中心
-    t_vec3 horizontal;     // スクリーンの横ベクトル（幅方向）
-    t_vec3 vertical;       // スクリーンの縦ベクトル（高さ方向）
-} t_camera;
-
-
-typedef struct s_light {//光源
-    t_vec3 pos; // 光源の位置
-    double brightness; // 光源の明るさ（0.0〜1.0）
-    t_color color; 
-} t_light;
-
-typedef struct s_sphere {//球
-    t_vec3 center;  // 球の中心
-    double radius;  // 球の半径
-    t_color color; 
-    int checkerboard; // チェッカーボードの有無（1: 有効, 0: 無効）
-} t_sphere;
-
+typedef struct s_sphere
+{
+	t_vec3		center;
+	double		radius;
+	t_color		color;
+	int			checkerboard;
+}				t_sphere;
 
 typedef struct s_sphere_hit
 {
@@ -152,69 +159,83 @@ typedef struct s_sphere_hit
 	double		t2;
 }				t_sphere_hit;
 
-typedef struct s_ambient {//環境光
-    double brightness; // 環境光の明るさ（0.0〜1.0）
-    t_color color; 
-} t_ambient;
+typedef struct s_ambient
+{
+	double		brightness;
+	t_color		color;
+}				t_ambient;
 
+typedef struct s_scene
+{
+	t_ambient	ambient;
+	int			ambient_count;
+	t_camera	camera;
+	int			camera_count;
+	t_light		*lights;
+	int			light_count;
+	t_sphere	*spheres;
+	int			sphere_count;
+	t_plane		*planes;
+	int			plane_count;
+	t_cylinder	*cylinders;
+	int			cylinder_count;
+	int			background_color;
+	int			anti_aliasing;
+}				t_scene;
 
-typedef struct s_scene {//シーン
-    t_ambient ambient; // 環境光
-    t_camera camera;    // カメラ
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
+	int			zoom_key;
+	int			camera_key;
+	int			fov_key;
+	t_scene		*scene;
+}				t_data;
 
-    t_light *lights;   // 光源
-    int light_count; // 光源の数
+typedef struct s_light_calc
+{
+	double		diffuse_strength;
+	double		specular_strength;
+	double		shininess;
+	double		spec;
+}				t_light_calc;
 
-    t_sphere *spheres; // 球の配列
-    int sphere_count; // 球の数
-    
-    t_plane *planes; // 平面の配列
-    int plane_count; // 平面の数
+typedef struct s_hit_record
+{
+	t_ray		ray;
+	double		t;
+	int			sphere_index;
+	int			plane_index;
+	int			cylinder_index;
+	t_vec3		normal;
+	t_vec3		hit_point;
+	t_color		color;
+}				t_hit_record;
 
-    t_cylinder *cylinders; // 円柱の配列
-    int cylinder_count; // 円柱の数
+typedef struct s_coord
+{
+	int			x;
+	int			y;
+	int			sx;
+	int			sy;
+	double		px;
+	double		py;
+}				t_coord;
 
-    int background_color; // 背景色
-    
-    int anti_aliasing; // アンチエイリアシングの有無（1: 有効, 0: 無効）
-} t_scene;
-
-
-typedef struct s_data {
-    void *mlx;
-    void *win;
-    void *img;
-    char *addr;
-    int bpp;
-    int line_length;
-    int endian;
-
-    int width;
-    int height;
-    int zoom_key;
-    int camera_key;
-    int fov_key;
-    int is_rendered;
-    unsigned int frame_count;
-    t_scene *scene;
-} t_data;
-
-
-typedef struct s_hit_record {
-    double t;
-    int sphere_index;
-    int plane_index;
-    int cylinder_index;
-    t_vec3 normal; // ヒット地点の法線ベクトル
-    t_vec3 hit_point; // ヒット地点の座標
-} t_hit_record;
-
-typedef struct s_thread_data {
-    int start_y;
-    int end_y;
-    t_data *data;
-} t_thread_data;
-
+typedef struct s_thread_data
+{
+	int			start_y;
+	int			end_y;
+	t_data		*data;
+}				t_thread_data;
 
 void free_data(t_data *data);
 // 関数宣言
@@ -323,4 +344,24 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	free_split(char **arr);
 int		ft_isspace(int c);
 
+void    set_s_checker(t_sphere *s, char ***tokens);
+void	sphere_check(t_sphere s);
+void	new_sphere(t_scene *scene, t_sphere s);
+void	parse_sphere(t_scene *scene, char ***tokens);
+
+void	light_check(t_light light);
+void	new_light(t_scene *scene, t_light light);
+void	parse_light(t_scene *scene, char ***tokens);
+
+void	parse_camera(t_scene *scene, char ***tokens);
+void	camera_token(t_scene *scene, char ***tokens);
+
+void    set_p_checker(t_plane *p, char ***tokens);
+void	plane_check(t_plane plane);
+void	new_plane(t_scene *scene, t_plane plane);
+void	parse_plane(t_scene *scene, char ***tokens);
+
+void	cy_check(t_cylinder cy);
+void	parse_cylinder(t_scene *scene, char ***tokens);
+void	new_cy(t_scene *scene, t_cylinder cy);
 #endif

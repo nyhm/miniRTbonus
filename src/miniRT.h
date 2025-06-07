@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:01:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 08:07:38 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 08:55:03 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,9 +165,9 @@ typedef struct s_ambient
 typedef struct s_scene
 {
 	t_ambient	ambient;
+	int			ambient_count;
 	t_camera	camera;
 	int			camera_count;
-	int			ambient_count;
 	t_light		*lights;
 	int			light_count;
 	t_sphere	*spheres;
@@ -189,7 +189,6 @@ typedef struct s_data
 	int			bpp;
 	int			line_length;
 	int			endian;
-
 	int			width;
 	int			height;
 	int			zoom_key;

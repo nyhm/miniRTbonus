@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:47:06 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 23:20:43 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:32:10 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -551,11 +551,7 @@ void	render(t_data *data)
 	t_thread_data	thread_data[NUM_THREADS];
 	int				slice;
 	int				i;
-	double			elapsed_time;
-	struct timeval	start;
-	struct timeval	end;
 
-	gettimeofday(&start, NULL);
 	slice = HEIGHT / NUM_THREADS;
 	i = 0;
 	while (i < NUM_THREADS)
@@ -575,8 +571,4 @@ void	render(t_data *data)
 		pthread_join(threads[i], NULL);
 		i++;
 	}
-	gettimeofday(&end, NULL);
-	elapsed_time = (end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec)
-		/ 1000000.0;
-	printf("Elapsed time: %.3f seconds\n", elapsed_time);
 }
