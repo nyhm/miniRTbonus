@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:59:33 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:12:56 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,7 +329,7 @@ t_ray			generate_camera_ray(t_data *data, t_coord coord);
 t_color			trace_ray(t_ray ray, t_data *data);
 
 // render_bonus.c
-void			find_closest_intersection(t_data *data, t_hit_record *record);
+
 void			render(t_data *data);
 
 // shadow_bonus.c
@@ -351,6 +351,7 @@ int				ft_count_words(const char *str, char delim);
 // utils3.c
 t_color			color_scale(t_color color, double scale);
 t_color			color_mul(t_color a, t_color b);
+void			find_closest_intersection(t_data *data, t_hit_record *record);
 
 // vec3_basic_bonus.c
 t_vec3			vec_add(t_vec3 a, t_vec3 b);

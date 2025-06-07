@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:47:06 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 08:00:43 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:27:33 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	put_pixel(t_data *data, int x, int y, t_color color);
 void	render_pixel(t_data *data, t_coord coord);
-void	*render_thread(void *arg);
 void	render(t_data *data);
 
 void	put_pixel(t_data *data, int x, int y, t_color color)
@@ -57,50 +56,67 @@ void	render_pixel(t_data *data, t_coord coord)
 	put_pixel(data, coord.x, coord.y, final_color);
 }
 
-void	*render_thread(void *arg)
+void	render(t_data *data)
 {
-	t_thread_data	*td;
-	t_coord			coord;
+	t_coord	coord;
 
-	td = (t_thread_data *)arg;
-	coord.y = td->start_y;
-	while (coord.y < td->end_y)
+	coord.y = 0;
+	while (coord.y < HEIGHT)
 	{
 		coord.x = 0;
 		while (coord.x < WIDTH)
 		{
-			render_pixel(td->data, coord);
+			render_pixel(data, coord);
 			coord.x++;
 		}
 		coord.y++;
 	}
-	return (NULL);
 }
 
-void	render(t_data *data)
-{
-	pthread_t		threads[NUM_THREADS];
-	t_thread_data	thread_data[NUM_THREADS];
-	int				slice;
-	int				i;
+// void	*render_thread(void *arg)
+// {
+// 	t_thread_data	*td;
+// 	t_coord			coord;
 
-	slice = HEIGHT / NUM_THREADS;
-	i = 0;
-	while (i < NUM_THREADS)
-	{
-		thread_data[i].start_y = i * slice;
-		if (i == NUM_THREADS - 1)
-			thread_data[i].end_y = HEIGHT;
-		else
-			thread_data[i].end_y = (i + 1) * slice;
-		thread_data[i].data = data;
-		pthread_create(&threads[i], NULL, render_thread, &thread_data[i]);
-		i++;
-	}
-	i = 0;
-	while (i < NUM_THREADS)
-	{
-		pthread_join(threads[i], NULL);
-		i++;
-	}
-}
+// 	td = (t_thread_data *)arg;
+// 	coord.y = td->start_y;
+// 	while (coord.y < td->end_y)
+// 	{
+// 		coord.x = 0;
+// 		while (coord.x < WIDTH)
+// 		{
+// 			render_pixel(td->data, coord);
+// 			coord.x++;
+// 		}
+// 		coord.y++;
+// 	}
+// 	return (NULL);
+// }
+
+// void	render(t_data *data)
+// {
+// 	pthread_t		threads[NUM_THREADS];
+// 	t_thread_data	thread_data[NUM_THREADS];
+// 	int				slice;
+// 	int				i;
+
+// 	slice = HEIGHT / NUM_THREADS;
+// 	i = 0;
+// 	while (i < NUM_THREADS)
+// 	{
+// 		thread_data[i].start_y = i * slice;
+// 		if (i == NUM_THREADS - 1)
+// 			thread_data[i].end_y = HEIGHT;
+// 		else
+// 			thread_data[i].end_y = (i + 1) * slice;
+// 		thread_data[i].data = data;
+// 		pthread_create(&threads[i], NULL, render_thread, &thread_data[i]);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < NUM_THREADS)
+// 	{
+// 		pthread_join(threads[i], NULL);
+// 		i++;
+// 	}
+// }
