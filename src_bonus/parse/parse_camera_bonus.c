@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 09:58:44 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:54:06 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	camera_token(t_scene *scene, char ***tokens)
 		ft_error("Error: duplicate camera\n");
 	if (count_array(tokens[0]) < 4)
 		ft_error("Error: invalid camera line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || ft_isspace((*tokens)[1][0]) \
-		|| ft_isspace((*tokens)[2][0]) || ft_isspace((*tokens)[3][0]))
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3]
+		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0])
+		|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid camera line\n");
 }
 
@@ -45,11 +46,11 @@ void	parse_camera(t_scene *scene, char ***tokens)
 		world_up = (t_vec3){0, 0, 1};
 	scene->camera.right = vec_normalize(vec_cross(scene->camera.dir, world_up));
 	scene->camera.up = vec_cross(scene->camera.right, scene->camera.dir);
-	scene->camera.screen_center = vec_add(scene->camera.pos, \
-		vec_scale(scene->camera.dir, 1.0));
+	scene->camera.screen_center = vec_add(scene->camera.pos,
+			vec_scale(scene->camera.dir, 1.0));
 	half_height = tan((scene->camera.fov * M_PI / 180.0) / 2);
-	scene->camera.horizontal = vec_scale(scene->camera.right, \
-		(scene->camera.aspect_ratio * half_height) * 2);
+	scene->camera.horizontal = vec_scale(scene->camera.right,
+			(scene->camera.aspect_ratio * half_height) * 2);
 	scene->camera.vertical = vec_scale(scene->camera.up, half_height * 2);
 	*tokens += 4;
 }

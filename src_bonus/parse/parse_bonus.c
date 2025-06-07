@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:52 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 10:00:21 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:21:17 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_color	parse_color(char *str)
 	color.r = ft_atoi(rgb_tokens[0]);
 	color.g = ft_atoi(rgb_tokens[1]);
 	color.b = ft_atoi(rgb_tokens[2]);
-	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 \
+	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255
 		|| color.b < 0 || color.b > 255)
 	{
 		free_split(rgb_tokens);
@@ -59,18 +59,18 @@ void	dispatch_parse(t_scene *scene, char **tokens)
 {
 	while (*tokens)
 	{
-        if (ft_strcmp(tokens[0], "A") == 0) 
-            parse_ambient(scene, &tokens);
-        else if (ft_strcmp(tokens[0], "C") == 0)
-            parse_camera(scene, &tokens);
-        else if (ft_strcmp(tokens[0], "L") == 0)
-            parse_light(scene, &tokens);
-        else if (ft_strcmp(tokens[0], "sp") == 0)
-            parse_sphere(scene, &tokens);
-        else if (ft_strcmp(tokens[0], "pl") == 0)
-            parse_plane(scene, &tokens);
-        else if (ft_strcmp(tokens[0], "cy") == 0)
-            parse_cylinder(scene, &tokens);
+		if (ft_strcmp(tokens[0], "A") == 0)
+			parse_ambient(scene, &tokens);
+		else if (ft_strcmp(tokens[0], "C") == 0)
+			parse_camera(scene, &tokens);
+		else if (ft_strcmp(tokens[0], "L") == 0)
+			parse_light(scene, &tokens);
+		else if (ft_strcmp(tokens[0], "sp") == 0)
+			parse_sphere(scene, &tokens);
+		else if (ft_strcmp(tokens[0], "pl") == 0)
+			parse_plane(scene, &tokens);
+		else if (ft_strcmp(tokens[0], "cy") == 0)
+			parse_cylinder(scene, &tokens);
 		else
 			tokens++;
 	}

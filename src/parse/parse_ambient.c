@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:00:35 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/05 18:22:36 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 11:58:03 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parse_ambient(t_scene *scene, char **tokens);
 
 void	parse_ambient(t_scene *scene, char **tokens)
 {
-	if (!tokens[1] || !tokens[2] || ft_isspace(tokens[1][0]) \
+	if (!tokens[1] || !tokens[2] || ft_isspace(tokens[1][0])
 		|| ft_isspace(tokens[2][0]))
 		ft_error("Error: invalid ambient line\n");
 	scene->ambient.brightness = ft_atof(tokens[1]);

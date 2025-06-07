@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 22:50:04 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/05/27 19:11:20 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 11:57:03 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	result = (char *)malloc(len1 + len2 + 1);
 	if (!result)
-		return (NULL);		
+		return (NULL);
 	ft_strcpy(result, s1);
 	ft_strcpy(result + len1, s2);
 	return (result);

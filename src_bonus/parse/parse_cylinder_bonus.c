@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 10:23:44 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:54:29 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,25 @@ void	new_cy(t_scene *scene, t_cylinder cy);
 
 void	set_c_checker(t_cylinder *cy, char ***tokens)
 {
-    if ((*tokens)[6] && (ft_strcmp((*tokens)[6], "checkerboard") == 0 || ft_strcmp((*tokens)[6], "checkerboard\n") == 0)) {
-        cy->checkerboard = 1;
-        (*tokens) += 7;  // 7つ分進める (C + center + direction + radius + height + color + checkerboard)
-    } else {
-        cy->checkerboard = 0;
-        (*tokens) += 6;  // 6つ分進める (C + center + direction + radius + height + color)
-    }
+	if ((*tokens)[6] && (ft_strcmp((*tokens)[6], "checkerboard") == 0
+			|| ft_strcmp((*tokens)[6], "checkerboard\n") == 0))
+	{
+		cy->checkerboard = 1;
+		(*tokens) += 7;
+	}
+	else
+	{
+		cy->checkerboard = 0;
+		(*tokens) += 6;
+	}
 }
+
 void	cy_check(t_cylinder cy)
 {
 	if (vec_len2(cy.direction) == 0)
 		ft_error("Error: cylinder direction cannot be zero vector\n");
-	if (cy.center.x < -1000 || cy.center.x > 1000 || \
-		cy.center.y < -1000 || cy.center.y > 1000 || \
-		cy.center.z < -1000 || cy.center.z > 1000)
+	if (cy.center.x < -1000 || cy.center.x > 1000 || cy.center.y < -1000
+		|| cy.center.y > 1000 || cy.center.z < -1000 || cy.center.z > 1000)
 		ft_error("Error: cylinder center must be between -1000 and 1000\n");
 	if (cy.radius <= 0)
 		ft_error("Error: cylinder radius must be greater than 0\n");
@@ -56,8 +60,8 @@ void	new_cy(t_scene *scene, t_cylinder cy)
 	ft_memset(new_arr, 0, sizeof(t_cylinder) * new_count);
 	if (scene->cylinders)
 	{
-		ft_memcpy(new_arr, scene->cylinders, sizeof(t_cylinder) \
-		* scene->cylinder_count);
+		ft_memcpy(new_arr, scene->cylinders, sizeof(t_cylinder)
+			* scene->cylinder_count);
 		free(scene->cylinders);
 	}
 	new_arr[scene->cylinder_count] = cy;
@@ -71,15 +75,16 @@ void	parse_cylinder(t_scene *scene, char ***tokens)
 
 	if (count_array(tokens[0]) < 6)
 		ft_error("Error: invalid cylinder line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || !(*tokens)[4] || !(*tokens)[5] || \
-		ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0]) || \
-		ft_isspace((*tokens)[4][0]) || ft_isspace((*tokens)[5][0]))
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || !(*tokens)[4]
+		|| !(*tokens)[5] || ft_isspace((*tokens)[1][0])
+		|| ft_isspace((*tokens)[2][0]) || ft_isspace((*tokens)[4][0])
+		|| ft_isspace((*tokens)[5][0]))
 		ft_error("Error: invalid cylinder line\n");
 	cy.center = parse_vec3((*tokens)[1]);
 	cy.direction = vec_normalize(parse_vec3((*tokens)[2]));
 	cy.radius = atof((*tokens)[3]) / 2.0;
 	cy.height = atof((*tokens)[4]);
 	cy.color = parse_color((*tokens)[5]);
+	set_c_checker(&cy, tokens);
 	new_cy(scene, cy);
 }
-
