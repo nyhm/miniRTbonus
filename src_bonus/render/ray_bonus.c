@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ray_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:25 by hnagashi          #+#    #+#             */
 /*   Updated: 2025/06/07 19:58:47 by hnagashi         ###   ########.fr       */
@@ -12,7 +12,10 @@
 
 #include "../miniRT_bonus.h"
 
+//t_ray				create_ray(t_vec3 origin, t_vec3 direction);
 static t_hit_record	hit_record_init(t_ray ray);
+// t_color				trace_ray(t_ray ray, t_data *data);
+// t_ray				generate_camera_ray(t_data *data, t_coord coord);
 
 t_ray	create_ray(t_vec3 origin, t_vec3 direction)
 {
@@ -78,8 +81,8 @@ t_ray	generate_camera_ray(t_data *data, t_coord coord)
 	scale = tan(data->scene->camera.fov * 0.5 * M_PI / 180.0);
 	coord.px = (2 * u - 1) * data->scene->camera.aspect_ratio * scale;
 	coord.py = (1 - 2 * v) * scale;
-	dir = vec_normalize(vec_add(vec_add(vec_mul(data->scene->camera.right,
-						coord.px), vec_mul(data->scene->camera.up, coord.py)),
+	dir = vec_normalize(vec_add(vec_add(vec_mul(data->scene->camera.right, \
+						coord.px), vec_mul(data->scene->camera.up, coord.py)), \
 				data->scene->camera.dir));
 	return (create_ray(data->scene->camera.pos, dir));
 }
