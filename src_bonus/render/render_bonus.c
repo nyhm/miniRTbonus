@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:47:06 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:08:49 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:10:34 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
+//void		find_closest_intersection(t_data *data, t_hit_record *record);
 static void	put_pixel(t_data *data, int x, int y, t_color color);
 static void	render_pixel(t_data *data, t_coord coord);
 static void	*render_thread(void *arg);
+//void		render(t_data *data);
 
-void	find_closest_intersection(t_data *data, t_hit_record *record)
+void	find_closest_intersection(t_data *data, t_hit_record *record)//utilsでいいかも？
 {
 	find_closest_plane(data, record);
 	find_closest_sphere(data, record);
@@ -58,7 +60,7 @@ static void	render_pixel(t_data *data, t_coord coord)
 		}
 		coord.sy++;
 	}
-	final_color = (t_color){color.r / (SAMPLES * SAMPLES), color.g / (SAMPLES
+	final_color = (t_color){color.r / (SAMPLES * SAMPLES), color.g / (SAMPLES \
 			* SAMPLES), color.b / (SAMPLES * SAMPLES)};
 	put_pixel(data, coord.x, coord.y, final_color);
 }
@@ -100,13 +102,13 @@ void	render(t_data *data)
 		else
 			thread_data[i].end_y = (i + 1) * slice;
 		thread_data[i].data = data;
-		pthread_create(&threads[i], NULL, render_thread, &thread_data[i]);
+		pthread_create(&threads[i], NULL, render_thread, &thread_data[i]);//pthread_create()のエラー処理をするべきかも？
 		i++;
 	}
 	i = 0;
 	while (i < NUM_THREADS)
 	{
-		pthread_join(threads[i], NULL);
+		pthread_join(threads[i], NULL);//上と同様
 		i++;
 	}
 }
