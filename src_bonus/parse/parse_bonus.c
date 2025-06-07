@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:52 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:16:04 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:25:48 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ t_color	parse_color(char *str)
 	rgb_tokens = ft_split(str, ',');
 	if (!rgb_tokens)
 		return (color);
+	if (!rgb_tokens[0] || !rgb_tokens[1] || !rgb_tokens[2])
+	{
+		free_split(rgb_tokens);
+		ft_error("Error: color values (r, g, b) must be between 0 and 255\n");
+	}
 	color.r = ft_atoi(rgb_tokens[0]);
 	color.g = ft_atoi(rgb_tokens[1]);
 	color.b = ft_atoi(rgb_tokens[2]);
