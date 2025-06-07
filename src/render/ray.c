@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:25 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 18:00:44 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:56:02 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ t_color	trace_ray(t_ray ray, t_data *data)
 		}
 	}
 	else
-		final = record.color;
+		final = color_scale(color_mul(record.color, data->scene->ambient.color),
+				data->scene->ambient.brightness);
 	return (final);
 }
 

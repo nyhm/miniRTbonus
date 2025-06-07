@@ -356,6 +356,10 @@ double			ft_atof(char *str);
 void			ft_error(const char *msg);
 int				ft_count_words(const char *str, char delim);
 
+// utils3.c
+t_color			color_scale(t_color color, double scale);
+t_color			color_mul(t_color a, t_color b);
+
 /* ************************************************************************** */
 // vec3_basic_bonus.c
 t_vec3			vec_add(t_vec3 a, t_vec3 b);
