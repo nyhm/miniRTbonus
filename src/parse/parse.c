@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:52 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:14:56 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:52:30 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	parse_line(char *line, t_scene *scene)
 		return ;
 	}
 	dispatch_parse(scene, tokens);
-		free_split(tokens);
+	free_split(tokens);
 }
 
 void	parse_rt_file(const char *filename, t_scene *scene)
