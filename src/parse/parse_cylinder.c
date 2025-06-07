@@ -6,48 +6,33 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/05 18:22:41 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:47:57 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
 void	cy_token(t_scene *scene, char ***tokens, size_t count_tokens);
-void	cy_check(t_cylinder cy, t_cylinder *new_arr);
+void	cy_check(t_cylinder cy);
 void	parse_cylinder(t_scene *scene, char **tokens);
 void	new_cy(t_scene *scene, t_cylinder cy);
 
-void	cy_check(t_cylinder cy, t_cylinder *new_arr)
+void	cy_check(t_cylinder cy)
 {
 	if (vec_len2(cy.direction) == 0)
-	{
-		free(new_arr);
 		ft_error("Error: cylinder direction cannot be zero vector\n");
-	}
-	if (cy.center.x < -1000 || cy.center.x > 1000 || \
-		cy.center.y < -1000 || cy.center.y > 1000 || \
-		cy.center.z < -1000 || cy.center.z > 1000)
-	{
-		free(new_arr);
-		ft_error("Error: cylinder center must be between -1000 and 1000\n");
-	}
 	if (cy.radius <= 0)
-	{
-		free(new_arr);
 		ft_error("Error: cylinder radius must be greater than 0\n");
-	}
 	if (cy.height <= 0)
-	{
-		free(new_arr);
 		ft_error("Error: cylinder height must be greater than 0\n");
-	}
 }
 
 void	new_cy(t_scene *scene, t_cylinder cy)
 {
 	t_cylinder	*new_arr;
 	size_t		new_count;
-
+	
+	cy_check(cy);
 	new_count = scene->cylinder_count + 1;
 	new_arr = malloc(sizeof(t_cylinder) * new_count);
 	if (!new_arr)
@@ -62,7 +47,6 @@ void	new_cy(t_scene *scene, t_cylinder cy)
 		* scene->cylinder_count);
 		free(scene->cylinders);
 	}
-	cy_check(cy, new_arr);
 	new_arr[scene->cylinder_count] = cy;
 	scene->cylinders = new_arr;
 	scene->cylinder_count = new_count;

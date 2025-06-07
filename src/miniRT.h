@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:01:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:57:59 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:52:37 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define KEY_CTRL 65508
 # define KEY_CTRL2 65507
 
-# define NUM_THREADS 16
+// # define NUM_THREADS 16
 # define SAMPLES 1
 
 typedef struct s_vec3
@@ -294,26 +294,23 @@ void			camera_token(t_scene *scene, char ***tokens,
 
 // parse_cylinder.c
 void			cy_token(t_scene *scene, char ***tokens, size_t count_tokens);
-void			cy_check(t_cylinder cy, t_cylinder *new_arr);
+void			cy_check(t_cylinder cy);
 void			parse_cylinder(t_scene *scene, char **tokens);
 void			new_cy(t_scene *scene, t_cylinder cy);
 
 // parse_light.c
-void			light_check(t_light light, t_light *new_arr);
 void			new_light(t_scene *scene, t_light light);
 void			parse_light(t_scene *scene, char **tokens);
 void			light_token(t_scene *scene, char ***tokens,
 					size_t count_tokens);
 
 // parse_plane.c
-void			plane_check(t_plane plane, t_plane *new_arr);
 void			new_plane(t_scene *scene, t_plane plane);
 void			parse_plane(t_scene *scene, char **tokens);
 void			plane_token(t_scene *scene, char ***tokens,
 					size_t count_tokens);
 
 // parse_sphere.c
-void			sphere_check(t_sphere s, t_sphere *new_arr);
 void			new_sphere(t_scene *scene, t_sphere s);
 void			parse_sphere(t_scene *scene, char **tokens);
 void			sp_token(t_scene *scene, char ***tokens, size_t count_tokens);

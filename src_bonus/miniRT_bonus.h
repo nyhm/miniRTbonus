@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:12:56 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:57:40 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define KEY_CTRL 65508
 # define KEY_CTRL2 65507
 
-# define NUM_THREADS 16
+// # define NUM_THREADS 16
 # define SAMPLES 1
 
 /* ************************************************************************** */
@@ -294,19 +294,15 @@ t_color			parse_color(char *str);
 void			parse_camera(t_scene *scene, char ***tokens);
 
 // parse_cylinder_bonus.c
-void			cy_check(t_cylinder cy);
 void			parse_cylinder(t_scene *scene, char ***tokens);
 
 // parse_light_bonus.c
-void			light_check(t_light light);
 void			parse_light(t_scene *scene, char ***tokens);
 
 // parse_plane_bonus.c
-void			set_p_checker(t_plane *p, char ***tokens);
 void			parse_plane(t_scene *scene, char ***tokens);
 
 // parse_sphere_bonus.c
-void			set_s_checker(t_sphere *s, char ***tokens);
 void			parse_sphere(t_scene *scene, char ***tokens);
 
 /* ************************************************************************** */
