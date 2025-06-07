@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:57:59 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:52:29 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:04:18 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,4 @@ void	sp_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 4)
 		ft_error("Error: invalid sphere line\n");
 	parse_sphere(scene, *tokens);
-	*tokens += 4;
 }

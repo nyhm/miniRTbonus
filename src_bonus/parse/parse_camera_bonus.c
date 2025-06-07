@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:41:00 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:05:19 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,4 @@ void	parse_camera(t_scene *scene, char ***tokens)
 	scene->camera.horizontal = vec_scale(scene->camera.right,
 			(scene->camera.aspect_ratio * half_height) * 2);
 	scene->camera.vertical = vec_scale(scene->camera.up, half_height * 2);
-	*tokens += 4;
 }

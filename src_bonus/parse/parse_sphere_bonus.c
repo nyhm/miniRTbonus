@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:57:59 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:58:38 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:06:52 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,9 @@ static void	set_s_checker(t_sphere *s, char ***tokens)
 {
 	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0
 			|| ft_strcmp((*tokens)[4], "checkerboard\n") == 0))
-	{
 		s->checkerboard = 1;
-		*tokens += 5;
-	}
 	else
-	{
 		s->checkerboard = 0;
-		*tokens += 4;
-	}
 }
 
 static void	new_sphere(t_scene *scene, t_sphere s)

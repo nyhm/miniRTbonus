@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:31:47 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:03:58 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	camera_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 4)
 		ft_error("Error: invalid camera line\n");
 	parse_camera(scene, *tokens);
-	*tokens += 4;
 }
 
 void	parse_camera(t_scene *scene, char **tokens)

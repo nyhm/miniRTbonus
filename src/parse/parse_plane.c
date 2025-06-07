@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:40:20 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:04:25 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,4 @@ void	plane_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 4)
 		ft_error("Error: invalid plane line\n");
 	parse_plane(scene, *tokens);
-	*tokens += 4;
 }

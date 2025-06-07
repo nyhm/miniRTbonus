@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:37:10 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:04:33 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,4 @@ void	cy_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 6)
 		ft_error("Error: invalid cylinder line\n");
 	parse_cylinder(scene, *tokens);
-	*tokens += 6;
 }

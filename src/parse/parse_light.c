@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:02:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:49:57 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:04:09 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,4 @@ void	light_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 4)
 		ft_error("Error: invalid light line\n");
 	parse_light(scene, *tokens);
-	*tokens += 4;
 }

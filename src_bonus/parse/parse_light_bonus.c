@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:02:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:56:01 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:06:22 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,4 @@ void	parse_light(t_scene *scene, char ***tokens)
 	light.brightness = ft_atof((*tokens)[2]);
 	light.color = parse_color((*tokens)[3]);
 	new_light(scene, light);
-	*tokens += 4;
 }

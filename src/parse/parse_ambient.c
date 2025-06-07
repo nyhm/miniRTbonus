@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:00:35 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:08:06 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:03:47 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,4 @@ void	ambient_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 3)
 		ft_error("Error: invalid ambient line\n");
 	parse_ambient(scene, *tokens);
-	*tokens += 3;
 }

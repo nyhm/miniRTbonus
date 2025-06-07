@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:00:35 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 15:46:19 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 02:05:11 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,4 @@ void	parse_ambient(t_scene *scene, char ***tokens)
 		ft_error("Error: invalid ambient line\n");
 	scene->ambient.brightness = ft_atof((*tokens)[1]);
 	scene->ambient.color = parse_color((*tokens)[2]);
-	*tokens += 3;
 }

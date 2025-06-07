@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 19:56:32 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:11:18 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 01:15:26 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,9 @@ int	is_empty_or_comment(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+	while (line[i] && line[i] == ' ')
 		i++;
-	if (line[i] == '\0')
-		return (1);
-	if (line[i] == '#')
-		return (1);
-	if (line[i] == '\n')
+	if (line[i] == '\0' || line[i] == '\t' || line[i] == '#' || line[i] == '\n')
 		return (1);
 	return (0);
 }
