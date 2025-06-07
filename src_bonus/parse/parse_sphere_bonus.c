@@ -6,7 +6,7 @@
 /*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:57:59 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:58:48 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:24:48 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	sphere_check(t_sphere s);
 static void	new_sphere(t_scene *scene, t_sphere s);
 void		parse_sphere(t_scene *scene, char ***tokens);
 
-void	set_s_checker(t_sphere *s, char ***tokens)
+void	set_s_checker(t_sphere *s, char ***tokens) //static
 {
 	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0 \
 			|| ft_strcmp((*tokens)[4], "checkerboard\n") == 0))

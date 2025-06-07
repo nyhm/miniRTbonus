@@ -6,15 +6,17 @@
 /*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:02:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:00:24 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:25:47 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
+//void		light_check(t_light light);
 static void	new_light(t_scene *scene, t_light light);
+//void		parse_light(t_scene *scene, char ***tokens);
 
-void	light_check(t_light light)
+void	light_check(t_light light) //static
 {
 	if (light.brightness < 0 || light.brightness > 1)
 		ft_error("Error: light brightness must be between 0 and 1\n");
