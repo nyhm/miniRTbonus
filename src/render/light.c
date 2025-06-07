@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 07:51:46 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 17:31:30 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 17:49:25 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_color	apply_lighting(t_hit_record record, t_light light, t_data *data)
 
 	color_d = (t_color_double){0, 0, 0};
 	calculate_ambient(record.color, data->scene->ambient, &color_d);
-	if (!is_in_shadow(record.hit_point, light, data))
+	if (light.brightness > 0 && !is_in_shadow(record.hit_point, light, data))
 		calculate_diffuse_specular(record, light, data, &color_d);
 	return (finalize_color(color_d));
 }

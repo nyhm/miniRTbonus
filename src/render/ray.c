@@ -6,15 +6,16 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:25 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/06 07:59:54 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:00:44 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT.h"
 
-t_ray	create_ray(t_vec3 origin, t_vec3 direction);
-t_ray	generate_camera_ray(t_data *data, t_coord coord);
-t_color	trace_ray(t_ray ray, t_data *data);
+static t_hit_record	hit_record_init(t_ray ray);
+t_ray				create_ray(t_vec3 origin, t_vec3 direction);
+t_ray				generate_camera_ray(t_data *data, t_coord coord);
+t_color				trace_ray(t_ray ray, t_data *data);
 
 t_ray	create_ray(t_vec3 origin, t_vec3 direction)
 {
@@ -23,6 +24,21 @@ t_ray	create_ray(t_vec3 origin, t_vec3 direction)
 	r.origin = origin;
 	r.direction = direction;
 	return (r);
+}
+
+static t_hit_record	hit_record_init(t_ray ray)
+{
+	t_hit_record	rec;
+
+	rec.ray = ray;
+	rec.t = INFINITY;
+	rec.sphere_index = -1;
+	rec.plane_index = -1;
+	rec.cylinder_index = -1;
+	rec.normal = (t_vec3){0, 0, 0};
+	rec.hit_point = (t_vec3){0, 0, 0};
+	rec.color = (t_color){0, 0, 0};
+	return (rec);
 }
 
 t_color	trace_ray(t_ray ray, t_data *data)
@@ -34,10 +50,9 @@ t_color	trace_ray(t_ray ray, t_data *data)
 	t_color			light_result;
 
 	final = (t_color){0, 0, 0};
-	record = (t_hit_record){ray, INFINITY, -1, -1, -1, {0, 0, 0}, {0, 0, 0}, \
-		{100, 100, 100}};
+	record = hit_record_init(ray);
 	find_closest_intersection(data, &record);
-	if (record.t < INFINITY)
+	if (record.t < INFINITY && data->scene->light_count)
 	{
 		i = 0;
 		while (i < data->scene->light_count)
