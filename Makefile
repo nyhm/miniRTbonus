@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+         #
+#    By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 14:46:21 by hnagashi          #+#    #+#              #
-#    Updated: 2025/06/07 19:59:51 by hnagashi         ###   ########.fr        #
+#    Updated: 2025/06/07 20:11:57 by samatsum         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC = src/main.c src/utils/utils.c src/utils/utils2.c src/utils/utils3.c\
 		src/get_next_line/get_next_line.c src/get_next_line/get_next_line_utils.c \
 		src/hit/hit.c src/hit/hit_cylinder.c \
 		src/key_hook/key_hook.c src/key_hook/key_hook_utils.c \
-		src/vec3/vec3.c src/vec3/vec3_utils.c src/vec3/vec3_basic.c 
+		src/vec3/vec3.c src/vec3/vec3_utils.c src/vec3/vec3_basic.c \
+
 SRC_BONUS = src_bonus/main_bonus.c \
 		src_bonus/vec3/vec3_basic_bonus.c src_bonus/vec3/vec3_utils_bonus.c src_bonus/vec3/vec3_bonus.c \
 		src_bonus/render/ray_bonus.c src_bonus/render/find_bonus.c src_bonus/render/light_bonus.c src_bonus/render/render_bonus.c src_bonus/render/shadow_bonus.c src_bonus/render/checker_bonus.c src_bonus/render/checker_cy_bonus.c\
@@ -34,7 +35,8 @@ SRC_BONUS = src_bonus/main_bonus.c \
 		src_bonus/parse/parse_plane_bonus.c src_bonus/parse/parse_camera_bonus.c src_bonus/parse/parse_cylinder_bonus.c src_bonus/parse/parse_ambient_bonus.c\
 		src_bonus/utils/utils_bonus.c src_bonus/utils/utils2_bonus.c src_bonus/utils/utils3_bonus.c \
 		src_bonus/key_hook/key_hook_utils_bonus.c src_bonus/key_hook/key_hook_bonus.c \
-		src_bonus/get_next_line/get_next_line_bonus.c src_bonus/get_next_line/get_next_line_utils_bonus.c 
+		src_bonus/get_next_line/get_next_line_bonus.c src_bonus/get_next_line/get_next_line_utils_bonus.c \
+
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 

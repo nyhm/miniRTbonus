@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_plane_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 15:32:38 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:59:44 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		parse_plane(t_scene *scene, char ***tokens);
 
 void	set_p_checker(t_plane *p, char ***tokens)
 {
-	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0
+	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0 \
 			|| ft_strcmp((*tokens)[4], "checkerboard\n") == 0))
 	{
 		p->checkerboard = 1;
@@ -36,12 +36,12 @@ static void	plane_check(t_plane plane)
 {
 	if (vec_len2(plane.normal) == 0)
 		ft_error("Error: plane normal cannot be zero vector\n");
-	if (plane.point.x < -1000 || plane.point.x > 1000 || plane.point.y < -1000
-		|| plane.point.y > 1000 || plane.point.z < -1000
-		|| plane.point.z > 1000)
+	if (plane.point.x < -1000 || plane.point.x > 1000 || plane.point.y < -1000 \
+			|| plane.point.y > 1000 || plane.point.z < -1000 \
+				|| plane.point.z > 1000)
 		ft_error("Error: plane point must be between -1000 and 1000\n");
-	if (plane.color.r < 0 || plane.color.r > 255 || plane.color.g < 0
-		|| plane.color.g > 255 || plane.color.b < 0 || plane.color.b > 255)
+	if (plane.color.r < 0 || plane.color.r > 255 || plane.color.g < 0 \
+			|| plane.color.g > 255 || plane.color.b < 0 || plane.color.b > 255)
 		ft_error("Error: plane color values must be between 0 and 255\n");
 }
 
@@ -75,9 +75,9 @@ void	parse_plane(t_scene *scene, char ***tokens)
 
 	if (count_array(tokens[0]) < 4)
 		ft_error("Error: invalid plane line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3]
-		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0])
-		|| ft_isspace((*tokens)[3][0]))
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] \
+			|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0]) \
+				|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid plane line\n");
 	plane.point = parse_vec3((*tokens)[1]);
 	plane.normal = vec_normalize(parse_vec3((*tokens)[2]));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:02:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 15:48:57 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:00:24 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	light_check(t_light light)
 {
 	if (light.brightness < 0 || light.brightness > 1)
 		ft_error("Error: light brightness must be between 0 and 1\n");
-	if (light.pos.x < -1000 || light.pos.x > 1000 || light.pos.y < -1000
-		|| light.pos.y > 1000 || light.pos.z < -1000 || light.pos.z > 1000)
+	if (light.pos.x < -1000 || light.pos.x > 1000 || light.pos.y < -1000 \
+			|| light.pos.y > 1000 || light.pos.z < -1000 || light.pos.z > 1000)
 		ft_error("Error: light position must be between -1000 and 1000\n");
-	if (light.color.r < 0 || light.color.r > 255 || light.color.g < 0
-		|| light.color.g > 255 || light.color.b < 0 || light.color.b > 255)
+	if (light.color.r < 0 || light.color.r > 255 || light.color.g < 0 \
+			|| light.color.g > 255 || light.color.b < 0 || light.color.b > 255)
 		ft_error("Error: light color values must be between 0 and 255\n");
 }
 
@@ -56,9 +56,9 @@ void	parse_light(t_scene *scene, char ***tokens)
 
 	if (count_array(tokens[0]) < 4)
 		ft_error("Error: invalid light line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3]
-		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0])
-		|| ft_isspace((*tokens)[3][0]))
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] \
+			|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0]) \
+				|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid light line\n");
 	light.pos = parse_vec3((*tokens)[1]);
 	light.brightness = ft_atof((*tokens)[2]);
