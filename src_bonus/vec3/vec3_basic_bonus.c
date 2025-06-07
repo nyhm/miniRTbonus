@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   vec3_basic_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:18:24 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:01:44 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 19:43:44 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
+
+// t_vec3	vec_add(t_vec3 a, t_vec3 b);
+// t_vec3	vec_sub(t_vec3 a, t_vec3 b);
+// t_vec3	vec_mul(t_vec3 v, double t);
+// double	vec_dot(t_vec3 a, t_vec3 b);
 
 t_vec3	vec_add(t_vec3 a, t_vec3 b)
 {
