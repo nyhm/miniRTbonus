@@ -6,7 +6,7 @@
 /*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:59:44 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/07 20:25:20 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	plane_check(t_plane plane);
 static void	new_plane(t_scene *scene, t_plane plane);
 void		parse_plane(t_scene *scene, char ***tokens);
 
-void	set_p_checker(t_plane *p, char ***tokens)
+void	set_p_checker(t_plane *p, char ***tokens) //static
 {
 	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0 \
 			|| ft_strcmp((*tokens)[4], "checkerboard\n") == 0))
