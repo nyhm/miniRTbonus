@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:56:51 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:24:00 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,26 @@ void		parse_plane(t_scene *scene, char ***tokens);
 
 static void	set_p_checker(t_plane *p, char ***tokens)
 {
-	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0
-			|| ft_strcmp((*tokens)[4], "checkerboard\n") == 0))
+	int	i;
+
+	p->bump_map = 0;
+	p->checkerboard = 0;
+	i = 4;
+	while (i <= 6 && (*tokens)[i])
 	{
-		p->checkerboard = 1;
-		*tokens += 5;
-	}
-	else
-	{
-		p->checkerboard = 0;
-		*tokens += 4;
+		if ((ft_strcmp((*tokens)[i], "bump_map") == 0 || \
+			ft_strcmp((*tokens)[i], "bump_map\n") == 0) && !p->bump_map)
+			p->bump_map = 1;
+		else if ((ft_strcmp((*tokens)[i], "checkerboard") == 0 || \
+			ft_strcmp((*tokens)[i], "checkerboard\n") == 0) && !p->checkerboard)
+			p->checkerboard = 1;
+		else if ((*tokens)[i] && !ft_isspace((*tokens)[i][0]))
+		{
+			ft_putstr_fd("Error: invalid texture identifier for plane: ", 2);
+			ft_putendl_fd((*tokens)[i], 2);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 }
 
@@ -36,6 +46,8 @@ static void	new_plane(t_scene *scene, t_plane plane)
 	size_t	new_count;
 	t_plane	*new_arr;
 
+	if (!is_unit_vector(plane.normal))
+		ft_error("Error: orientation vector is not normalized\n");
 	if (vec_len2(plane.normal) == 0)
 		ft_error("Error: plane normal cannot be zero vector\n");
 	new_count = scene->plane_count + 1;
@@ -67,7 +79,7 @@ void	parse_plane(t_scene *scene, char ***tokens)
 		|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid plane line\n");
 	plane.point = parse_vec3((*tokens)[1]);
-	plane.normal = vec_normalize(parse_vec3((*tokens)[2]));
+	plane.normal = parse_vec3((*tokens)[2]);
 	plane.color = parse_color((*tokens)[3]);
 	set_p_checker(&plane, tokens);
 	new_plane(scene, plane);

@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:57:40 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:26:26 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,50 @@ typedef struct s_vec3
 	double		z;
 }				t_vec3;
 /* ************************************************************************** */
+typedef struct s_cy_checkerboard_vars
+{
+	t_vec3		radial;
+	double		angle;
+	double		h;
+	t_vec3		cp;
+	double		height;
+	double		half_height;
+	int			checker;
+}				t_cy_checkerboard_vars;
+/* ************************************************************************** */
+typedef struct s_cy_cap_checkerboard_vars
+{
+	t_vec3		center;
+	t_vec3		diff;
+	t_vec3		u;
+	t_vec3		v;
+	t_vec3		up;
+	double		x_2d;
+	double		y_2d;
+	int			checker;
+}				t_cy_cap_checkerboard_vars;
+/* ************************************************************************** */
+typedef struct s_cone_side_hit_vars
+{
+	t_vec3		co;
+	t_vec3		d;
+	t_vec3		v;
+	double		k;
+	double		k2;
+	double		dv;
+	double		cov;
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		sqrt_d;
+	double		t1;
+	double		t2;
+	t_vec3		p;
+	double		h;
+	double		radius;
+}				t_cone_side_hit_vars;
+/* ************************************************************************** */
 typedef struct s_color_double
 {
 	double		r;
@@ -87,6 +131,7 @@ typedef struct s_plane
 	t_vec3		normal;
 	t_color		color;
 	int			checkerboard;
+	int			bump_map;
 }				t_plane;
 /* ************************************************************************** */
 typedef struct s_ray
@@ -103,6 +148,7 @@ typedef struct s_cylinder
 	double		height;
 	t_color		color;
 	int			checkerboard;
+	int			bump_map;
 }				t_cylinder;
 /* ************************************************************************** */
 typedef struct s_quadratic
@@ -160,6 +206,7 @@ typedef struct s_sphere
 	double		radius;
 	t_color		color;
 	int			checkerboard;
+	int			bump_map;
 }				t_sphere;
 /* ************************************************************************** */
 typedef struct s_sphere_hit
@@ -180,6 +227,70 @@ typedef struct s_ambient
 	t_color		color;
 }				t_ambient;
 /* ************************************************************************** */
+typedef struct s_bump_data
+{
+	t_vec3		tangent;
+	t_vec3		bitangent;
+	t_vec3		perturb;
+	t_vec3		new_normal;
+	double		u;
+	double		v;
+	double		bump;
+}				t_bump_data;
+/* ************************************************************************** */
+typedef struct s_cone_bump_vars
+{
+	t_vec3		axis_dir;
+	t_vec3		rel;
+	double		height_on_axis;
+	double		base_radius;
+	double		radius_at_height;
+	t_vec3		radial;
+}				t_cone_bump_vars;
+/* ************************************************************************** */
+typedef struct s_cone_cap_hit_vars
+{
+	t_vec3		base_center;
+	double		radius;
+	double		denom;
+	double		t;
+	t_vec3		p;
+	double		dist2;
+}				t_cone_cap_hit_vars;
+/* ************************************************************************** */
+typedef struct s_cone_checkerboard_vars
+{
+	t_vec3		vec;
+	double		height_on_axis;
+	double		base_radius;
+	double		radius_at_height;
+	t_vec3		radial;
+	double		angle_2d;
+	double		height_scaled;
+	int			checker;
+	double		u_coord;
+	double		v_coord;
+}				t_cone_checkerboard_vars;
+/* ************************************************************************** */
+typedef struct s_cone
+{
+	t_vec3		apex;
+	t_vec3		direction;
+	double		height;
+	double		angle;
+	t_color		color;
+	int			checkerboard;
+	int			bump_map;
+}				t_cone;
+/* ************************************************************************** */
+typedef struct s_cone_hit
+{
+	t_cone		*cone;
+	t_ray		ray;
+	int			count;
+	double		*t_candidates;
+}				t_cone_hit;
+/* ************************************************************************** */
 typedef struct s_scene
 {
 	t_ambient	ambient;
@@ -194,6 +305,8 @@ typedef struct s_scene
 	int			plane_count;
 	t_cylinder	*cylinders;
 	int			cylinder_count;
+	t_cone		*cones;
+	int			cone_count;
 	int			background_color;
 	int			anti_aliasing;
 }				t_scene;
@@ -230,6 +343,7 @@ typedef struct s_hit_record
 	int			sphere_index;
 	int			plane_index;
 	int			cylinder_index;
+	int			cone_index;
 	t_vec3		normal;
 	t_vec3		hit_point;
 	t_color		color;
@@ -266,6 +380,9 @@ int				hit_sphere(t_sphere *sphere, t_ray ray, double *t_hit);
 int				hit_cylinder(t_cylinder *cy, t_ray ray, double *t_hit);
 int				hit_plane(t_plane *pl, t_ray ray, double *t_hit);
 
+// hit_cone_bonus.c
+int				hit_cone(t_cone *cone, t_ray ray, double *t_hit);
+
 // hit_cylinder_bonus.c
 int				select_closest_hit(double *t_candidates, int count,
 					double *t_hit);
@@ -293,6 +410,9 @@ t_color			parse_color(char *str);
 // parse_camera_bonus.c
 void			parse_camera(t_scene *scene, char ***tokens);
 
+// parse_cone_bonus.c
+void			parse_cone(t_scene *scene, char ***tokens);
+
 // parse_cylinder_bonus.c
 void			parse_cylinder(t_scene *scene, char ***tokens);
 
@@ -306,6 +426,13 @@ void			parse_plane(t_scene *scene, char ***tokens);
 void			parse_sphere(t_scene *scene, char ***tokens);
 
 /* ************************************************************************** */
+// bump_map_bonus.c
+t_vec3			apply_bump_map_cylinder(t_hit_record *rec, t_cylinder *cy);
+t_vec3			apply_bump_map_sphere(t_hit_record *rec);
+t_vec3			apply_bump_map(t_hit_record *rec);
+
+// bump_map_cone_bonus.c
+t_vec3			apply_bump_map_cone(t_hit_record *rec, t_cone *cone);
 // checker_bonus.c
 t_color			opposite_color(t_color c);
 t_color			get_checkerboard_color(t_hit_record *record, t_plane *pl,
@@ -313,13 +440,19 @@ t_color			get_checkerboard_color(t_hit_record *record, t_plane *pl,
 t_color			get_sphere_checker_color(t_hit_record *record, t_sphere *s,
 					double scale);
 
+// checker_cone_bonus.c
+t_color			get_cone_checker_color(t_vec3 point, t_cone *cone);
+
 // checker_cy_bonus.c
 t_color			get_cylinder_checker_color(t_vec3 point, t_cylinder *cy);
 
 // find_bonus.c
-void			find_closest_plane(t_data *data, t_hit_record *record);
 void			find_closest_sphere(t_data *data, t_hit_record *record);
 void			find_closest_cylinder(t_data *data, t_hit_record *record);
+
+// find2_bonus.c
+void			find_closest_plane(t_data *data, t_hit_record *record);
+void			find_closest_cone(t_data *data, t_hit_record *record);
 
 // light_bonus.c
 void			light_set(t_color *dest, t_color src);
@@ -327,6 +460,7 @@ t_color			apply_lighting(t_hit_record record, t_light light,
 					t_data *data);
 
 // ray_bonus.c
+void			find_closest_intersection(t_data *data, t_hit_record *record);
 t_ray			create_ray(t_vec3 origin, t_vec3 direction);
 t_ray			generate_camera_ray(t_data *data, t_coord coord);
 t_color			trace_ray(t_ray ray, t_data *data);
@@ -355,7 +489,12 @@ int				ft_count_words(const char *str, char delim);
 // utils3.c
 t_color			color_scale(t_color color, double scale);
 t_color			color_mul(t_color a, t_color b);
-void			find_closest_intersection(t_data *data, t_hit_record *record);
+int				is_strict_integer(const char *str);
+int				has_rt_extension(const char *filename);
+int				is_empty_or_comment(char *line);
+
+// utils4.c
+int				is_unit_vector(t_vec3 vec3);
 
 /* ************************************************************************** */
 // vec3_basic_bonus.c

@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:57:59 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:58:38 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:27:43 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,26 @@ void		parse_sphere(t_scene *scene, char ***tokens);
 
 static void	set_s_checker(t_sphere *s, char ***tokens)
 {
-	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0
-			|| ft_strcmp((*tokens)[4], "checkerboard\n") == 0))
+	int	i;
+
+	s->bump_map = 0;
+	s->checkerboard = 0;
+	i = 4;
+	while (i <= 6 && (*tokens)[i])
 	{
-		s->checkerboard = 1;
-		*tokens += 5;
-	}
-	else
-	{
-		s->checkerboard = 0;
-		*tokens += 4;
+		if ((ft_strcmp((*tokens)[i], "bump_map") == 0 || \
+			ft_strcmp((*tokens)[i], "bump_map\n") == 0) && !s->bump_map)
+			s->bump_map = 1;
+		else if ((ft_strcmp((*tokens)[i], "checkerboard") == 0 || \
+			ft_strcmp((*tokens)[i], "checkerboard\n") == 0) && !s->checkerboard)
+			s->checkerboard = 1;
+		else if ((*tokens)[i] && !ft_isspace((*tokens)[i][0]))
+		{
+			ft_putstr_fd("Error: invalid texture identifier for sphere: ", 2);
+			ft_putendl_fd((*tokens)[i], 2);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 }
 

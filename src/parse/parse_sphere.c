@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:57:59 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:52:29 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 03:43:40 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	parse_sphere(t_scene *scene, char **tokens)
 	if (!tokens[1] || !tokens[2] || !tokens[3] || ft_isspace(tokens[1][0])
 		|| ft_isspace(tokens[2][0]) || ft_isspace(tokens[3][0]))
 		ft_error("Error: invalid sphere line\n");
+	if (tokens[4] && !ft_isspace(tokens[4][0]))
+	{
+		ft_putstr_fd("Error: invalid texture identifier for sphere: ", 2);
+		ft_putendl_fd(tokens[4], 2);
+		exit(EXIT_FAILURE);
+	}
 	s.center = parse_vec3(tokens[1]);
 	s.radius = ft_atof(tokens[2]) / 2.0;
 	s.color = parse_color(tokens[3]);
@@ -60,5 +66,4 @@ void	sp_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 4)
 		ft_error("Error: invalid sphere line\n");
 	parse_sphere(scene, *tokens);
-	*tokens += 4;
 }

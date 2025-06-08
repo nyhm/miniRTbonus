@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 06:32:32 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 15:44:36 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 08:22:18 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	check_side_hit(t_cylinder_hit *hit, double t_side)
 	{
 		p = vec_add(hit->ray.origin, vec_mul(hit->ray.direction, t_side));
 		h = vec_dot(vec_sub(p, hit->cy->center), hit->cy->direction);
-		if (h >= 0 && h <= hit->cy->height)
+		if (h >= -hit->cy->height / 2 && h <= hit->cy->height / 2)
 			hit->t_candidates[hit->count++] = t_side;
 	}
 	return (hit->count);
@@ -83,8 +83,8 @@ int	hit_cylinder_side(t_cylinder_hit *hit)
 		q.sqrt_discriminant = sqrt(q.discriminant);
 		q.t0 = (-q.b - q.sqrt_discriminant) / (2.0 * q.a);
 		q.t1 = (-q.b + q.sqrt_discriminant) / (2.0 * q.a);
-		hit->count = check_side_hit(hit, q.t0);
-		hit->count = check_side_hit(hit, q.t1);
+		check_side_hit(hit, q.t0);
+		check_side_hit(hit, q.t1);
 	}
 	return (hit->count);
 }

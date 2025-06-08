@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:02:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:49:57 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 03:42:31 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ void	parse_light(t_scene *scene, char **tokens)
 	if (!tokens[1] || !tokens[2] || !tokens[3] || ft_isspace(tokens[1][0])
 		|| ft_isspace(tokens[2][0]) || ft_isspace(tokens[3][0]))
 		ft_error("Error: invalid light line\n");
+	if (tokens[4] && !ft_isspace(tokens[4][0]))
+	{
+		ft_putstr_fd("Error: invalid texture identifier for light: ", 2);
+		ft_putendl_fd(tokens[4], 2);
+		exit(EXIT_FAILURE);
+	}
 	light.pos = parse_vec3(tokens[1]);
 	light.brightness = ft_atof(tokens[2]);
 	light.color = parse_color(tokens[3]);
@@ -61,5 +67,4 @@ void	light_token(t_scene *scene, char ***tokens, size_t count_tokens)
 	if (count_tokens < 4)
 		ft_error("Error: invalid light line\n");
 	parse_light(scene, *tokens);
-	*tokens += 4;
 }

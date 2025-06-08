@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:45:10 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:44:39 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:01:21 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT_bonus.h"
 
 static void	init_data(t_data *data);
-//void		free_data(t_data *data);
+// void		free_data(t_data *data);
 static void	print_controls(void);
-//int			main(int argc, char **argv);
+// int			main(int argc, char **argv);
 
 static void	init_data(t_data *data)
 {
@@ -26,7 +26,7 @@ static void	init_data(t_data *data)
 	if (!data->win)
 		ft_error("Error: mlx_new_window failed\n");
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_length, \
+	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_length,
 			&data->endian);
 	if (!data->addr)
 		ft_error("Error: mlx_get_data_addr failed\n");
@@ -88,6 +88,8 @@ int	main(int argc, char **argv)
 		write(2, "Usage: ./miniRT <scene.rt>\n", 27);
 		return (1);
 	}
+	if (!has_rt_extension(argv[1]))
+		ft_error("Error: file must have a .rt extension\n");
 	ft_memset(&scene, 0, sizeof(scene));
 	parse_rt_file(argv[1], &scene);
 	ft_memset(&data, 0, sizeof(data));

@@ -6,13 +6,12 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:47:06 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 20:26:05 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/07 23:12:35 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-// void		find_closest_intersection(t_data *data, t_hit_record *record);
 static void	put_pixel(t_data *data, int x, int y, t_color color);
 static void	render_pixel(t_data *data, t_coord coord);
 // void		render(t_data *data);

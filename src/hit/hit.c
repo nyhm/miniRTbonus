@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:38 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/05 18:35:01 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:10:15 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ int	hit_cylinder_caps(t_cylinder_hit *hit)
 	info.count = hit->count;
 	info.radius = hit->cy->radius;
 	info.normal = hit->cy->direction;
-	info.center = hit->cy->center;
-	info.count = check_cap_hit(&info);
-	info.center = vec_add(hit->cy->center, vec_mul(hit->cy->direction,
-				hit->cy->height));
-	info.count = check_cap_hit(&info);
+	info.center = vec_sub(hit->cy->center, \
+		vec_mul(hit->cy->direction, hit->cy->height * 0.5));
+	check_cap_hit(&info);
+	info.center = vec_add(hit->cy->center, \
+		vec_mul(hit->cy->direction, hit->cy->height * 0.5));
+	check_cap_hit(&info);
 	hit->count = info.count;
 	return (hit->count);
 }

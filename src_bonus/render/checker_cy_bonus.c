@@ -3,58 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   checker_cy_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 14:05:30 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:07:39 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:53:01 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-static int	is_cylinder_bottom_checkerboard(t_vec3 point, t_cylinder *cy, \
-				double scale);
 static int	is_cylinder_checkerboard(t_vec3 point, t_cylinder *cy);
-//t_color		get_cylinder_checker_color(t_vec3 point, t_cylinder *cy);
+// t_color		get_cylinder_checker_color(t_vec3 point, t_cylinder *cy);
 
-static int	is_cylinder_bottom_checkerboard(t_vec3 point, t_cylinder *cy, \
-		double scale)
+static int	is_cylinder_cap_checkerboard(t_vec3 point, t_cylinder *cy,
+		double scale, int is_top)
 {
-	t_vec3	bottom_center;
-	t_vec3	diff;
-	t_vec3	u;
-	double	x_2d;
-	double	y_2d;
+	t_cy_cap_checkerboard_vars	vars;
 
-	bottom_center = cy->center;
-	diff = vec_sub(point, bottom_center);
-	u = vec_normalize(vec_cross(cy->direction, (t_vec3){0, 1, 0}));
-	if (vec_len2(u) < 0.001)
-		u = (t_vec3){1, 0, 0};
-	x_2d = vec_dot(diff, u) * scale;
-	y_2d = vec_dot(diff, vec_cross(cy->direction, u)) * scale;
-	return (((int)floor(x_2d) + (int)floor(y_2d)) % 2 == 0);
+	if (is_top)
+		vars.center = vec_add(cy->center, vec_mul(cy->direction, cy->height
+					* 0.5));
+	else
+		vars.center = vec_sub(cy->center, vec_mul(cy->direction, cy->height
+					* 0.5));
+	vars.diff = vec_sub(point, vars.center);
+	vars.up = (t_vec3){0, 1, 0};
+	if (fabs(vec_dot(cy->direction, vars.up)) > 0.999)
+		vars.up = (t_vec3){1, 0, 0};
+	vars.u = vec_normalize(vec_cross(vars.up, cy->direction));
+	vars.v = vec_normalize(vec_cross(cy->direction, vars.u));
+	vars.x_2d = vec_dot(vars.diff, vars.u) * scale;
+	vars.y_2d = vec_dot(vars.diff, vars.v) * scale;
+	vars.checker = ((int)floor(vars.x_2d) + (int)floor(vars.y_2d)) % 2;
+	if (vars.checker < 0)
+		vars.checker += 2;
+	return (vars.checker == 0);
 }
 
 static int	is_cylinder_checkerboard(t_vec3 point, t_cylinder *cy)
 {
+	t_cy_checkerboard_vars	vars;
 	t_cy_checkerboard_scale	scale;
-	t_cy_coord				coord;
-	t_vec3					cp;
-	double					height;
-	t_vec3					radial;
 
 	scale = (t_cy_checkerboard_scale){1.0, 10.0, 1.0};
-	cp = vec_sub(point, cy->center);
-	height = vec_dot(cp, cy->direction);
-	if (height < 0.001)
-		return (is_cylinder_bottom_checkerboard(point, cy, scale.bottom));
+	vars.cp = vec_sub(point, cy->center);
+	vars.height = vec_dot(vars.cp, cy->direction);
+	vars.half_height = cy->height * 0.5;
+	if (vars.height < -vars.half_height + 0.001)
+		return (is_cylinder_cap_checkerboard(point, cy, scale.bottom, 0));
+	else if (vars.height > vars.half_height - 0.001)
+		return (is_cylinder_cap_checkerboard(point, cy, scale.bottom, 1));
 	else
 	{
-		coord.height = height * scale.height;
-		radial = vec_sub(cp, vec_mul(cy->direction, height));
-		coord.angle = atan2(radial.z, radial.x) * scale.angle;
-		return (((int)floor(coord.height) + (int)floor(coord.angle)) % 2 == 0);
+		vars.radial = vec_sub(vars.cp, vec_mul(cy->direction, vars.height));
+		vars.angle = atan2(vars.radial.z, vars.radial.x) * scale.angle;
+		vars.h = (vars.height + vars.half_height) * scale.height;
+		vars.checker = ((int)floor(vars.angle) + (int)floor(vars.h)) % 2;
+		if (vars.checker < 0)
+			vars.checker += 2;
+		return (vars.checker == 0);
 	}
 }
 
