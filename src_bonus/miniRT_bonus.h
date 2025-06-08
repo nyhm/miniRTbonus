@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 07:38:11 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 09:58:17 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,29 @@ typedef struct s_vec3
 	double		y;
 	double		z;
 }				t_vec3;
+/* ************************************************************************** */
+typedef struct s_cy_checkerboard_vars
+{
+	t_vec3		radial;
+	double		angle;
+	double		h;
+	t_vec3		cp;
+	double		height;
+	double		half_height;
+	int			checker;
+}				t_cy_checkerboard_vars;
+/* ************************************************************************** */
+typedef struct s_cy_cap_checkerboard_vars
+{
+	t_vec3		center;
+	t_vec3		diff;
+	t_vec3		u;
+	t_vec3		v;
+	t_vec3		up;
+	double		x_2d;
+	double		y_2d;
+	int			checker;
+}				t_cy_cap_checkerboard_vars;
 /* ************************************************************************** */
 typedef struct s_color_double
 {
@@ -179,6 +202,18 @@ typedef struct s_ambient
 	double		brightness;
 	t_color		color;
 }				t_ambient;
+/* ************************************************************************** */
+typedef struct s_bump_data
+{
+	t_vec3		tangent;
+	t_vec3		bitangent;
+	t_vec3		perturb;
+	t_vec3		new_normal;
+	double		u;
+	double		v;
+	double		bump;
+}				t_bump_data;
+
 /* ************************************************************************** */
 typedef struct s_scene
 {
@@ -306,6 +341,11 @@ void			parse_plane(t_scene *scene, char ***tokens);
 void			parse_sphere(t_scene *scene, char ***tokens);
 
 /* ************************************************************************** */
+// bump_map_bonus.c
+t_vec3			apply_bump_map_cylinder(t_hit_record *rec, t_cylinder *cy);
+t_vec3			apply_bump_map_sphere(t_hit_record *rec);
+t_vec3			apply_bump_map(t_hit_record *rec);
+
 // checker_bonus.c
 t_color			opposite_color(t_color c);
 t_color			get_checkerboard_color(t_hit_record *record, t_plane *pl,
@@ -317,9 +357,11 @@ t_color			get_sphere_checker_color(t_hit_record *record, t_sphere *s,
 t_color			get_cylinder_checker_color(t_vec3 point, t_cylinder *cy);
 
 // find_bonus.c
-void			find_closest_plane(t_data *data, t_hit_record *record);
 void			find_closest_sphere(t_data *data, t_hit_record *record);
 void			find_closest_cylinder(t_data *data, t_hit_record *record);
+
+// find2_bonus.c
+void			find_closest_plane(t_data *data, t_hit_record *record);
 
 // light_bonus.c
 void			light_set(t_color *dest, t_color src);

@@ -6,7 +6,7 @@
 #    By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 14:46:21 by hnagashi          #+#    #+#              #
-#    Updated: 2025/06/07 23:35:35 by hnagashi         ###   ########.fr        #
+#    Updated: 2025/06/08 10:01:24 by hnagashi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC = src/main.c src/utils/utils.c src/utils/utils2.c src/utils/utils3.c src/uti
 
 SRC_BONUS = src_bonus/main_bonus.c \
 		src_bonus/vec3/vec3_basic_bonus.c src_bonus/vec3/vec3_utils_bonus.c src_bonus/vec3/vec3_bonus.c \
-		src_bonus/render/ray_bonus.c src_bonus/render/find_bonus.c src_bonus/render/light_bonus.c src_bonus/render/render_bonus.c src_bonus/render/shadow_bonus.c src_bonus/render/checker_bonus.c src_bonus/render/checker_cy_bonus.c\
+		src_bonus/render/ray_bonus.c src_bonus/render/find_bonus.c src_bonus/render/find2_bonus.c  src_bonus/render/light_bonus.c src_bonus/render/render_bonus.c \
+		src_bonus/render/shadow_bonus.c src_bonus/render/checker_bonus.c src_bonus/render/checker_cy_bonus.c src_bonus/render/bump_map_bonus.c \
 		src_bonus/hit/hit_bonus.c src_bonus/hit/hit_cylinder_bonus.c \
 		src_bonus/parse/parse_bonus.c src_bonus/parse/parse_sphere_bonus.c src_bonus/parse/parse_light_bonus.c \
 		src_bonus/parse/parse_plane_bonus.c src_bonus/parse/parse_camera_bonus.c src_bonus/parse/parse_cylinder_bonus.c src_bonus/parse/parse_ambient_bonus.c\
