@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 09:57:12 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 11:09:36 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 11:57:06 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	set_plane(t_hit_record *record, double t_hit, t_data *data, int i)
 	record->t = t_hit;
 	record->sphere_index = -1;
 	record->cylinder_index = -1;
-	record->hit_point = vec_add(record->ray.origin,
+	record->hit_point = vec_add(record->ray.origin, \
 			vec_mul(record->ray.direction, t_hit));
 	record->color = pl->color;
 	if (pl->checkerboard)
@@ -61,7 +61,7 @@ static void	set_cone(t_hit_record *record, double t_hit, t_data *data, int i)
 	record->sphere_index = -1;
 	record->plane_index = -1;
 	record->cylinder_index = -1;
-	record->hit_point = vec_add(record->ray.origin,
+	record->hit_point = vec_add(record->ray.origin, \
 			vec_mul(record->ray.direction, t_hit));
 	cp = vec_sub(record->hit_point, cone->apex);
 	proj = vec_dot(cp, cone->direction);
@@ -76,8 +76,8 @@ static void	set_cone(t_hit_record *record, double t_hit, t_data *data, int i)
 
 void	find_closest_cone(t_data *data, t_hit_record *record)
 {
-	int i;
-	double t_hit;
+	int		i;
+	double	t_hit;
 
 	i = 0;
 	while (i < data->scene->cone_count)

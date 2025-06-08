@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 11:08:23 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:26:26 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,27 @@ typedef struct s_cy_cap_checkerboard_vars
 	double		y_2d;
 	int			checker;
 }				t_cy_cap_checkerboard_vars;
+/* ************************************************************************** */
+typedef struct s_cone_side_hit_vars
+{
+	t_vec3		co;
+	t_vec3		d;
+	t_vec3		v;
+	double		k;
+	double		k2;
+	double		dv;
+	double		cov;
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+	double		sqrt_d;
+	double		t1;
+	double		t2;
+	t_vec3		p;
+	double		h;
+	double		radius;
+}				t_cone_side_hit_vars;
 /* ************************************************************************** */
 typedef struct s_color_double
 {
@@ -217,6 +238,40 @@ typedef struct s_bump_data
 	double		bump;
 }				t_bump_data;
 /* ************************************************************************** */
+typedef struct s_cone_bump_vars
+{
+	t_vec3		axis_dir;
+	t_vec3		rel;
+	double		height_on_axis;
+	double		base_radius;
+	double		radius_at_height;
+	t_vec3		radial;
+}				t_cone_bump_vars;
+/* ************************************************************************** */
+typedef struct s_cone_cap_hit_vars
+{
+	t_vec3		base_center;
+	double		radius;
+	double		denom;
+	double		t;
+	t_vec3		p;
+	double		dist2;
+}				t_cone_cap_hit_vars;
+/* ************************************************************************** */
+typedef struct s_cone_checkerboard_vars
+{
+	t_vec3		vec;
+	double		height_on_axis;
+	double		base_radius;
+	double		radius_at_height;
+	t_vec3		radial;
+	double		angle_2d;
+	double		height_scaled;
+	int			checker;
+	double		u_coord;
+	double		v_coord;
+}				t_cone_checkerboard_vars;
+/* ************************************************************************** */
 typedef struct s_cone
 {
 	t_vec3		apex;
@@ -235,7 +290,6 @@ typedef struct s_cone_hit
 	int			count;
 	double		*t_candidates;
 }				t_cone_hit;
-
 /* ************************************************************************** */
 typedef struct s_scene
 {

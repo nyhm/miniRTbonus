@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 10:37:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 10:45:12 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:01:35 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	set_co_checker(t_cone *cone, char ***tokens)
 	i = 6;
 	while (i <= 8 && (*tokens)[i])
 	{
-		if ((ft_strcmp((*tokens)[i], "bump_map") == 0 || ft_strcmp((*tokens)[i],
-					"bump_map\n") == 0) && !cone->bump_map)
+		if ((ft_strcmp((*tokens)[i], "bump_map") == 0 || \
+			ft_strcmp((*tokens)[i], "bump_map\n") == 0) && !cone->bump_map)
 			cone->bump_map = 1;
-		else if ((ft_strcmp((*tokens)[i], "checkerboard") == 0
-				|| ft_strcmp((*tokens)[i], "checkerboard\n") == 0)
-			&& !cone->checkerboard)
+		else if ((ft_strcmp((*tokens)[i], "checkerboard") == 0 \
+				|| ft_strcmp((*tokens)[i], "checkerboard\n") == 0) \
+				&& !cone->checkerboard)
 			cone->checkerboard = 1;
 		else if ((*tokens)[i] && !ft_isspace((*tokens)[i][0]))
 		{
