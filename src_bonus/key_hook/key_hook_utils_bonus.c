@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 07:55:47 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 16:07:15 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:09:33 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void	rotate_camera_yaw(t_camera *cam, double angle);
 static void	rotate_camera_pitch(t_camera *cam, double angle);
+void		arrow_keys(t_data *data, int keycode);
+void		move_forward(t_data *data, int keycode);
+void		move_side(t_data *data, int keycode);
 
 static void	rotate_camera_yaw(t_camera *cam, double angle)
 {
@@ -51,18 +54,18 @@ void	move_forward(t_data *data, int keycode)
 {
 	if (keycode == KEY_W)
 	{
-		data->scene->camera.pos = vec_add(data->scene->camera.pos,
+		data->scene->camera.pos = vec_add(data->scene->camera.pos, \
 				vec_mul(data->scene->camera.dir, MOVE_SPEED));
 		data->scene->camera.screen_center = \
-				vec_add(data->scene->camera.screen_center,
+				vec_add(data->scene->camera.screen_center, \
 				vec_mul(data->scene->camera.dir, MOVE_SPEED));
 	}
 	else if (keycode == KEY_S)
 	{
-		data->scene->camera.pos = vec_add(data->scene->camera.pos,
+		data->scene->camera.pos = vec_add(data->scene->camera.pos, \
 				vec_mul(data->scene->camera.dir, -MOVE_SPEED));
 		data->scene->camera.screen_center = \
-				vec_add(data->scene->camera.screen_center,
+				vec_add(data->scene->camera.screen_center, \
 				vec_mul(data->scene->camera.dir, -MOVE_SPEED));
 	}
 }
@@ -71,18 +74,18 @@ void	move_side(t_data *data, int keycode)
 {
 	if (keycode == KEY_A)
 	{
-		data->scene->camera.pos = vec_add(data->scene->camera.pos,
+		data->scene->camera.pos = vec_add(data->scene->camera.pos, \
 				vec_mul(data->scene->camera.right, -MOVE_SPEED));
 		data->scene->camera.screen_center = \
-				vec_add(data->scene->camera.screen_center,
+				vec_add(data->scene->camera.screen_center, \
 				vec_mul(data->scene->camera.right, -MOVE_SPEED));
 	}
 	else if (keycode == KEY_D)
 	{
-		data->scene->camera.pos = vec_add(data->scene->camera.pos,
+		data->scene->camera.pos = vec_add(data->scene->camera.pos, \
 				vec_mul(data->scene->camera.right, MOVE_SPEED));
 		data->scene->camera.screen_center = \
-				vec_add(data->scene->camera.screen_center,
+				vec_add(data->scene->camera.screen_center, \
 				vec_mul(data->scene->camera.right, MOVE_SPEED));
 	}
 }

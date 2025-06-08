@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   find_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 07:38:38 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 10:28:13 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:16:13 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
 static void	set_sphere(t_hit_record *record, double t_hit, t_data *data, int i);
-// void		find_closest_sphere(t_data *data, t_hit_record *record);
+void		find_closest_sphere(t_data *data, t_hit_record *record);
 static void	set_cylinder(t_hit_record *record, double t_hit, t_data *data,
 				int i);
-// void		find_closest_cylinder(t_data *data, t_hit_record *record);
+void		find_closest_cylinder(t_data *data, t_hit_record *record);
 
 static void	set_sphere(t_hit_record *record, double t_hit, t_data *data, int i)
 {
@@ -28,8 +28,8 @@ static void	set_sphere(t_hit_record *record, double t_hit, t_data *data, int i)
 	record->sphere_index = i;
 	record->plane_index = -1;
 	record->cylinder_index = -1;
-	record->hit_point = vec_add(record->ray.origin,
-			vec_mul(record->ray.direction, t_hit));
+	record->hit_point = vec_add(record->ray.origin, \
+							vec_mul(record->ray.direction, t_hit));
 	record->normal = vec_normalize(vec_sub(record->hit_point, s->center));
 	record->hit_point = record->hit_point;
 	if (s->checkerboard)
@@ -47,7 +47,7 @@ void	find_closest_sphere(t_data *data, t_hit_record *record)
 	while (i < data->scene->sphere_count)
 	{
 		t_hit = 0.0;
-		if (hit_sphere(&data->scene->spheres[i], record->ray, &t_hit)
+		if (hit_sphere(&data->scene->spheres[i], record->ray, &t_hit) \
 			&& t_hit < record->t && t_hit > 0.001)
 			set_sphere(record, t_hit, data, i);
 		i++;
@@ -67,8 +67,8 @@ static void	set_cylinder(t_hit_record *record, double t_hit, t_data *data,
 	record->cylinder_index = i;
 	record->sphere_index = -1;
 	record->plane_index = -1;
-	record->hit_point = vec_add(record->ray.origin,
-			vec_mul(record->ray.direction, t_hit));
+	record->hit_point = vec_add(record->ray.origin, \
+							vec_mul(record->ray.direction, t_hit));
 	cp = vec_sub(record->hit_point, cy->center);
 	proj = vec_dot(cp, cy->direction);
 	record->normal = vec_normalize(vec_sub(cp, vec_mul(cy->direction, proj)));
@@ -87,7 +87,7 @@ void	find_closest_cylinder(t_data *data, t_hit_record *record)
 	while (i < data->scene->cylinder_count)
 	{
 		t_hit = 0.0;
-		if (hit_cylinder(&data->scene->cylinders[i], record->ray, &t_hit)
+		if (hit_cylinder(&data->scene->cylinders[i], record->ray, &t_hit) \
 			&& t_hit < record->t && t_hit > 0.001)
 			set_cylinder(record, t_hit, data, i);
 		i++;

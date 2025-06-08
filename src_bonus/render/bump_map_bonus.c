@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   bump_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 09:52:04 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 10:00:10 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:03:02 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
+t_vec3		apply_bump_map(t_hit_record *rec);
+t_vec3		apply_bump_map_sphere(t_hit_record *rec);
 static void	compute_bump_uv_and_tangents(t_bump_data *b, t_cylinder *cy, \
-	t_vec3 hit_point, double bump_scale);
+										t_vec3 hit_point, double bump_scale);
+t_vec3		apply_bump_map_cylinder(t_hit_record *rec, t_cylinder *cy);
 
 t_vec3	apply_bump_map(t_hit_record *rec)
 {

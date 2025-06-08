@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 03:30:36 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 15:45:28 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:10:33 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	move_height(t_data *data, int keycode);
 static void	fov_key(t_data *data, int keycode);
+int			keyhook(int keycode, t_data *data);
+int			close_window(void *param);
 
 static void	move_height(t_data *data, int keycode)
 {
@@ -47,11 +49,11 @@ static void	fov_key(t_data *data, int keycode)
 		if (data->scene->camera.fov < 1.0)
 			data->scene->camera.fov = 1.0;
 	}
-	data->scene->camera.aspect_ratio = (double)data->width
+	data->scene->camera.aspect_ratio = (double)data->width \
 		/ (double)data->height;
-	data->scene->camera.horizontal = vec_scale(data->scene->camera.right,
+	data->scene->camera.horizontal = vec_scale(data->scene->camera.right, \
 			tan(data->scene->camera.fov * M_PI / 360.0) * 2);
-	data->scene->camera.vertical = vec_scale(data->scene->camera.up,
+	data->scene->camera.vertical = vec_scale(data->scene->camera.up, \
 			tan(data->scene->camera.fov * M_PI / 360.0) * 2);
 }
 
@@ -59,14 +61,14 @@ int	keyhook(int keycode, t_data *data)
 {
 	if (keycode == KEY_ESC)
 		close_window(data);
-	else if (keycode == KEY_UP || keycode == KEY_DOWN || keycode == KEY_LEFT
+	else if (keycode == KEY_UP || keycode == KEY_DOWN || keycode == KEY_LEFT \
 		|| keycode == KEY_RIGHT)
 		arrow_keys(data, keycode);
 	else if (keycode == KEY_W || keycode == KEY_S)
 		move_forward(data, keycode);
 	else if (keycode == KEY_A || keycode == KEY_D)
 		move_side(data, keycode);
-	else if (keycode == KEY_SPACE || keycode == KEY_CTRL
+	else if (keycode == KEY_SPACE || keycode == KEY_CTRL \
 		|| keycode == KEY_CTRL2)
 		move_height(data, keycode);
 	else if (keycode == KEY_Q || keycode == KEY_E)

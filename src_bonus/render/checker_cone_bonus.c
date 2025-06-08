@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   checker_cone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 11:01:11 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 12:27:51 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:00:43 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
+
+static int	is_cone_checkerboard(t_vec3 point, t_cone *cone, double scale);
+t_color		get_cone_checker_color(t_vec3 point, t_cone *cone);
 
 static int	is_cone_checkerboard(t_vec3 point, t_cone *cone, double scale)
 {
@@ -28,7 +31,7 @@ static int	is_cone_checkerboard(t_vec3 point, t_cone *cone, double scale)
 		up = (t_vec3){1, 0, 0};
 	u = vec_normalize(vec_cross(up, cone->direction));
 	v = vec_normalize(vec_cross(cone->direction, u));
-	vars.radial = vec_sub(vars.vec, vec_mul(cone->direction,
+	vars.radial = vec_sub(vars.vec, vec_mul(cone->direction, \
 				vars.height_on_axis));
 	vars.u_coord = vec_dot(vars.radial, u) * scale;
 	vars.v_coord = vec_dot(vars.radial, v) * scale;

@@ -6,16 +6,16 @@
 /*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:52:43 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 19:40:42 by samatsum         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:51:18 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-// void	ft_atof2(char *str, int i, double *res, double *divisor);
-// double	ft_atof(char *str);
-// void	ft_error(const char *msg);
-// int		ft_count_words(const char *str, char delim);
+void	ft_atof2(char *str, int i, double *res, double *divisor);
+double	ft_atof(char *str);
+void	ft_error(const char *msg);
+int		ft_count_words(const char *str, char delim);
 
 void	ft_atof2(char *str, int i, double *res, double *divisor)
 {

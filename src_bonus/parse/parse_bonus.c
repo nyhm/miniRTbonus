@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:52 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 10:37:09 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:07:57 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 #include <stdbool.h>
 
-// t_color		parse_color(char *str);
+t_color		parse_color(char *str);
 static void	dispatch_parse(t_scene *scene, char **tokens);
 static void	parse_line(char *line, t_scene *scene);
-// void		parse_rt_file(const char *filename, t_scene *scene);
+void		parse_rt_file(const char *filename, t_scene *scene);
 
 void	check_color_token(char **rgb_tokens)
 {
@@ -25,7 +25,7 @@ void	check_color_token(char **rgb_tokens)
 		free_split(rgb_tokens);
 		ft_error("Error: color must have exactly 3 values (r,g,b)\n");
 	}
-	if (!is_strict_integer(rgb_tokens[0]) || !is_strict_integer(rgb_tokens[1])
+	if (!is_strict_integer(rgb_tokens[0]) || !is_strict_integer(rgb_tokens[1]) \
 		|| !is_strict_integer(rgb_tokens[2]))
 	{
 		free_split(rgb_tokens);
@@ -46,7 +46,7 @@ t_color	parse_color(char *str)
 	color.r = ft_atoi(rgb_tokens[0]);
 	color.g = ft_atoi(rgb_tokens[1]);
 	color.b = ft_atoi(rgb_tokens[2]);
-	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255
+	if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 \
 		|| color.b < 0 || color.b > 255)
 	{
 		free_split(rgb_tokens);

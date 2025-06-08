@@ -3,28 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   checker_cy_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 14:05:30 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 09:53:01 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:00:08 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
+static int	is_cylinder_cap_checkerboard(t_vec3 point, t_cylinder *cy, \
+									double scale, int is_top);
 static int	is_cylinder_checkerboard(t_vec3 point, t_cylinder *cy);
-// t_color		get_cylinder_checker_color(t_vec3 point, t_cylinder *cy);
+t_color		get_cylinder_checker_color(t_vec3 point, t_cylinder *cy);
 
-static int	is_cylinder_cap_checkerboard(t_vec3 point, t_cylinder *cy,
+static int	is_cylinder_cap_checkerboard(t_vec3 point, t_cylinder *cy, \
 		double scale, int is_top)
 {
 	t_cy_cap_checkerboard_vars	vars;
 
 	if (is_top)
-		vars.center = vec_add(cy->center, vec_mul(cy->direction, cy->height
+		vars.center = vec_add(cy->center, vec_mul(cy->direction, cy->height \
 					* 0.5));
 	else
-		vars.center = vec_sub(cy->center, vec_mul(cy->direction, cy->height
+		vars.center = vec_sub(cy->center, vec_mul(cy->direction, cy->height \
 					* 0.5));
 	vars.diff = vec_sub(point, vars.center);
 	vars.up = (t_vec3){0, 1, 0};

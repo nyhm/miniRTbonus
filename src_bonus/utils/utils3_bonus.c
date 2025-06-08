@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils3_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 19:56:32 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 01:15:26 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:14:03 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
+
+t_color	color_mul(t_color a, t_color b);
+t_color	color_scale(t_color color, double scale);
+int		is_strict_integer(const char *str);
+int		is_empty_or_comment(char *line);
+int		has_rt_extension(const char *filename);
 
 t_color	color_mul(t_color a, t_color b)
 {
@@ -30,7 +36,7 @@ int	is_strict_integer(const char *str)
 
 	len = ft_strlen(str);
 	end = len - 1;
-	while (end >= 0 && (str[end] == '\n' || str[end] == ' '
+	while (end >= 0 && (str[end] == '\n' || str[end] == ' ' \
 			|| str[end] == '\t'))
 		end--;
 	if (end < 0)
