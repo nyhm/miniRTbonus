@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:57:59 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 10:27:43 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:17:07 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	new_sphere(t_scene *scene, t_sphere s)
 	ft_memset(new_arr, 0, sizeof(t_sphere) * new_count);
 	if (scene->spheres && scene->sphere_count > 0)
 	{
-		ft_memcpy(new_arr, scene->spheres, sizeof(t_sphere)
+		ft_memcpy(new_arr, scene->spheres, sizeof(t_sphere) \
 			* scene->sphere_count);
 		free(scene->spheres);
 	}
@@ -73,8 +73,8 @@ void	parse_sphere(t_scene *scene, char ***tokens)
 
 	if (count_array(tokens[0]) < 4)
 		ft_error("Error: invalid sphere line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3]
-		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0])
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] \
+		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0]) \
 		|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid sphere line\n");
 	s.center = parse_vec3((*tokens)[1]);

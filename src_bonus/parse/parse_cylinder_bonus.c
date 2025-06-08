@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 10:24:29 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:17:43 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	set_c_checker(t_cylinder *cy, char ***tokens)
 			ft_strcmp((*tokens)[i], "bump_map\n") == 0) && !cy->bump_map)
 			cy->bump_map = 1;
 		else if ((ft_strcmp((*tokens)[i], "checkerboard") == 0 || \
-			ft_strcmp((*tokens)[i], "checkerboard\n") == 0) && \
-			!cy->checkerboard)
+				ft_strcmp((*tokens)[i], "checkerboard\n") == 0) && \
+					!cy->checkerboard)
 			cy->checkerboard = 1;
 		else if ((*tokens)[i] && !ft_isspace((*tokens)[i][0]))
 		{
@@ -71,7 +71,7 @@ static void	new_cy(t_scene *scene, t_cylinder cy)
 	ft_memset(new_arr, 0, sizeof(t_cylinder) * new_count);
 	if (scene->cylinders)
 	{
-		ft_memcpy(new_arr, scene->cylinders, sizeof(t_cylinder)
+		ft_memcpy(new_arr, scene->cylinders, sizeof(t_cylinder) \
 			* scene->cylinder_count);
 		free(scene->cylinders);
 	}
@@ -86,9 +86,9 @@ void	parse_cylinder(t_scene *scene, char ***tokens)
 
 	if (count_array(tokens[0]) < 6)
 		ft_error("Error: invalid cylinder line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || !(*tokens)[4]
-		|| !(*tokens)[5] || ft_isspace((*tokens)[1][0])
-		|| ft_isspace((*tokens)[2][0]) || ft_isspace((*tokens)[4][0])
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || !(*tokens)[4] \
+		|| !(*tokens)[5] || ft_isspace((*tokens)[1][0]) \
+		|| ft_isspace((*tokens)[2][0]) || ft_isspace((*tokens)[4][0]) \
 		|| ft_isspace((*tokens)[5][0]))
 		ft_error("Error: invalid cylinder line\n");
 	cy.center = parse_vec3((*tokens)[1]);

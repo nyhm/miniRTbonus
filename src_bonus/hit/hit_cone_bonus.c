@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cone_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 10:49:40 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 12:15:58 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:12:42 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
+
+static void	check_cone_t_candidate(t_cone_hit *hit, double t);
+void		hit_cone_side(t_cone_hit *hit);
+void		hit_cone_cap(t_cone_hit *hit);
+int			hit_cone(t_cone *cone, t_ray ray, double *t_hit);
 
 static void	check_cone_t_candidate(t_cone_hit *hit, double t)
 {
@@ -38,7 +43,7 @@ void	hit_cone_side(t_cone_hit *hit)
 	vars.dv = vec_dot(vars.d, vars.v);
 	vars.cov = vec_dot(vars.co, vars.v);
 	vars.a = vec_dot(vars.d, vars.d) - (1 + vars.k2) * vars.dv * vars.dv;
-	vars.b = 2 * (vec_dot(vars.d, vars.co) - (1 + vars.k2) * vars.dv
+	vars.b = 2 * (vec_dot(vars.d, vars.co) - (1 + vars.k2) * vars.dv \
 			* vars.cov);
 	vars.c = vec_dot(vars.co, vars.co) - (1 + vars.k2) * vars.cov * vars.cov;
 	vars.discriminant = vars.b * vars.b - 4 * vars.a * vars.c;
@@ -56,12 +61,12 @@ void	hit_cone_cap(t_cone_hit *hit)
 	t_cone_cap_hit_vars	vars;
 
 	vars.radius = tan(hit->cone->angle) * hit->cone->height;
-	vars.base_center = vec_add(hit->cone->apex, vec_mul(hit->cone->direction,
+	vars.base_center = vec_add(hit->cone->apex, vec_mul(hit->cone->direction, \
 				hit->cone->height));
 	vars.denom = vec_dot(hit->ray.direction, hit->cone->direction);
 	if (fabs(vars.denom) < 1e-6)
 		return ;
-	vars.t = vec_dot(vec_sub(vars.base_center, hit->ray.origin),
+	vars.t = vec_dot(vec_sub(vars.base_center, hit->ray.origin), \
 			hit->cone->direction) / vars.denom;
 	if (vars.t <= 0)
 		return ;

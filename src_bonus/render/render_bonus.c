@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:47:06 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:12:35 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:14:56 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	put_pixel(t_data *data, int x, int y, t_color color);
 static void	render_pixel(t_data *data, t_coord coord);
-// void		render(t_data *data);
+void		render(t_data *data);
 
 static void	put_pixel(t_data *data, int x, int y, t_color color)
 {
@@ -51,7 +51,7 @@ static void	render_pixel(t_data *data, t_coord coord)
 		}
 		coord.sy++;
 	}
-	final_color = (t_color){color.r / (SAMPLES * SAMPLES), color.g / (SAMPLES
+	final_color = (t_color){color.r / (SAMPLES * SAMPLES), color.g / (SAMPLES \
 			* SAMPLES), color.b / (SAMPLES * SAMPLES)};
 	put_pixel(data, coord.x, coord.y, final_color);
 }

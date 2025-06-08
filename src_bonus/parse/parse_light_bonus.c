@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_light_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:02:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 06:08:35 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:17:32 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
 static void	new_light(t_scene *scene, t_light light);
-// void		parse_light(t_scene *scene, char ***tokens);
+void		parse_light(t_scene *scene, char ***tokens);
 
 static void	new_light(t_scene *scene, t_light light)
 {
@@ -46,8 +46,8 @@ void	parse_light(t_scene *scene, char ***tokens)
 
 	if (count_array(tokens[0]) < 4)
 		ft_error("Error: invalid light line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3]
-		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0])
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] \
+		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0]) \
 		|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid light line\n");
 	if ((*tokens)[4] && !ft_isspace((*tokens)[4][0]))

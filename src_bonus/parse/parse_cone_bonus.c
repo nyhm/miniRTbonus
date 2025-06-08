@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cone_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 10:37:28 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 12:01:35 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:17:52 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	parse_cone(t_scene *scene, char ***tokens)
 
 	if (count_array(tokens[0]) < 6)
 		ft_error("Error: invalid cone line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || !(*tokens)[4]
-		|| !(*tokens)[5] || ft_isspace((*tokens)[1][0])
-		|| ft_isspace((*tokens)[2][0]) || ft_isspace((*tokens)[4][0])
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] || !(*tokens)[4] \
+		|| !(*tokens)[5] || ft_isspace((*tokens)[1][0]) \
+		|| ft_isspace((*tokens)[2][0]) || ft_isspace((*tokens)[4][0]) \
 		|| ft_isspace((*tokens)[5][0]))
 		ft_error("Error: invalid cone line\n");
 	cone.apex = parse_vec3((*tokens)[1]);

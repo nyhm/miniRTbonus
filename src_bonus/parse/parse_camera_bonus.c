@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_camera_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 17:01:34 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 06:07:12 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:07:35 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
+static void	check_camera_token(t_scene *scene);
 static void	camera_token(t_scene *scene, char ***tokens);
+void		parse_camera(t_scene *scene, char ***tokens);
 
 static void	check_camera_token(t_scene *scene)
 {
@@ -30,8 +32,8 @@ static void	camera_token(t_scene *scene, char ***tokens)
 		ft_error("Error: duplicate camera\n");
 	if (count_array(tokens[0]) < 4)
 		ft_error("Error: invalid camera line\n");
-	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3]
-		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0])
+	if (!(*tokens)[1] || !(*tokens)[2] || !(*tokens)[3] \
+		|| ft_isspace((*tokens)[1][0]) || ft_isspace((*tokens)[2][0]) \
 		|| ft_isspace((*tokens)[3][0]))
 		ft_error("Error: invalid camera line\n");
 	if ((*tokens)[4] && !ft_isspace((*tokens)[4][0]))

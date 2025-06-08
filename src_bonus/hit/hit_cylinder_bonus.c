@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 06:32:32 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 08:22:18 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:11:48 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
 static int	check_side_hit(t_cylinder_hit *hit, double t_side);
+int			select_closest_hit(double *t_candidates, int count, double *t_hit);
 static void	calc_cylinder_quadratic(t_cylinder_hit *hit, t_quadratic *q);
+int			hit_cylinder_side(t_cylinder_hit *hit);
+int			check_cap_hit(t_cap_hit *info);
 
 static int	check_side_hit(t_cylinder_hit *hit, double t_side)
 {
@@ -63,7 +66,7 @@ static void	calc_cylinder_quadratic(t_cylinder_hit *hit, t_quadratic *q)
 
 	ca = hit->cy->direction;
 	oc = vec_sub(hit->ray.origin, hit->cy->center);
-	dir_proj = vec_sub(hit->ray.direction, vec_mul(ca,
+	dir_proj = vec_sub(hit->ray.direction, vec_mul(ca, \
 				vec_dot(hit->ray.direction, ca)));
 	oc_proj = vec_sub(oc, vec_mul(ca, vec_dot(oc, ca)));
 	q->a = vec_dot(dir_proj, dir_proj);
@@ -100,13 +103,13 @@ int	check_cap_hit(t_cap_hit *info)
 	denom = vec_dot(info->normal, info->ray.direction);
 	if (fabs(denom) < 1e-6)
 		return (info->count);
-	t_plane = vec_dot(vec_sub(info->center, info->ray.origin), info->normal)
+	t_plane = vec_dot(vec_sub(info->center, info->ray.origin), info->normal) \
 		/ denom;
 	if (t_plane < 0.001)
 		return (info->count);
 	p = vec_add(info->ray.origin, vec_mul(info->ray.direction, t_plane));
 	v = vec_sub(p, info->center);
-	dist2 = vec_len2(vec_sub(v, vec_mul(info->normal, vec_dot(v,
+	dist2 = vec_len2(vec_sub(v, vec_mul(info->normal, vec_dot(v, \
 						info->normal))));
 	if (dist2 <= info->radius * info->radius)
 		info->t_candidates[info->count++] = t_plane;

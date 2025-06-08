@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   bump_map_cone_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 11:03:54 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 12:22:31 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:01:54 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
 
-static void	compute_bump_uv_and_tangents_cone(t_bump_data *b, t_cone *cone,
+static void	compute_bump_uv_and_tangents_cone(t_bump_data *b, t_cone *cone, \
+	t_vec3 hit_point, double bump_scale);
+t_vec3		apply_bump_map_cone(t_hit_record *rec, t_cone *cone);
+
+static void	compute_bump_uv_and_tangents_cone(t_bump_data *b, t_cone *cone, \
 		t_vec3 hit_point, double bump_scale)
 {
 	t_cone_bump_vars	vars;
@@ -52,7 +56,7 @@ t_vec3	apply_bump_map_cone(t_hit_record *rec, t_cone *cone)
 		return (normal);
 	compute_bump_uv_and_tangents_cone(&b, cone, rec->hit_point, bump_scale);
 	b.bump = sin(b.u) + 0.5 * sin(2 * b.u + b.v) + 0.25 * cos(3 * b.v + b.u);
-	b.perturb = vec_add(vec_mul(b.tangent, sin(b.u)), vec_mul(b.bitangent,
+	b.perturb = vec_add(vec_mul(b.tangent, sin(b.u)), vec_mul(b.bitangent, \
 				cos(b.v)));
 	if (vec_len2(b.perturb) < 1e-6)
 		b.perturb = (t_vec3){0, 0, 0};

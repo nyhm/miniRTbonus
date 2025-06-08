@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils4_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: samatsum <samatsum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 23:33:56 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:34:16 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:51:00 by samatsum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniRT_bonus.h"
+
+int	is_unit_vector(t_vec3 vec3);
 
 int	is_unit_vector(t_vec3 vec3)
 {
