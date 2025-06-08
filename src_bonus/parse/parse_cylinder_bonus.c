@@ -93,8 +93,8 @@ void	parse_cylinder(t_scene *scene, char ***tokens)
 		ft_error("Error: invalid cylinder line\n");
 	cy.center = parse_vec3((*tokens)[1]);
 	cy.direction = parse_vec3((*tokens)[2]);
-	cy.radius = atof((*tokens)[3]) / 2.0;
-	cy.height = atof((*tokens)[4]);
+	cy.radius = ft_atof((*tokens)[3]) / 2.0;
+	cy.height = ft_atof((*tokens)[4]);
 	cy.color = parse_color((*tokens)[5]);
 	set_c_checker(&cy, tokens);
 	new_cy(scene, cy);

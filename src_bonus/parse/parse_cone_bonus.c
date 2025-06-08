@@ -90,8 +90,8 @@ void	parse_cone(t_scene *scene, char ***tokens)
 		ft_error("Error: invalid cone line\n");
 	cone.apex = parse_vec3((*tokens)[1]);
 	cone.direction = parse_vec3((*tokens)[2]);
-	cone.height = atof((*tokens)[3]);
-	cone.angle = atof((*tokens)[4]);
+	cone.height = ft_atof((*tokens)[3]);
+	cone.angle = ft_atof((*tokens)[4]);
 	cone.color = parse_color((*tokens)[5]);
 	set_co_checker(&cone, tokens);
 	new_cone(scene, cone);
