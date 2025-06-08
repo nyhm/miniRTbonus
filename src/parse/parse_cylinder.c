@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 03:40:14 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:49:25 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	parse_cylinder(t_scene *scene, char **tokens)
 	}
 	cy.center = parse_vec3(tokens[1]);
 	cy.direction = parse_vec3(tokens[2]);
-	cy.radius = atof(tokens[3]) / 2.0;
-	cy.height = atof(tokens[4]);
+	cy.radius = ft_atof(tokens[3]) / 2.0;
+	cy.height = ft_atof(tokens[4]);
 	cy.color = parse_color(tokens[5]);
 	new_cy(scene, cy);
 }
