@@ -18,3 +18,4 @@ pl 0,0,-70 0,0,1 255,0,255 checkerboard
 pl 0,0,70 0,0,1 0,255,0 checkerboard 
 pl 70,0,0 1,0,0 255,0,0 bump_map
 pl -70,0,70 1,0,0 0,0,255 bump_map
+co -10,10,10  0,-1,0  10.0  10  255,0,0 bump_map checkerboard

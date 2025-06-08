@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:25 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:12:25 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:47:12 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	find_closest_intersection(t_data *data, t_hit_record *record)
 	find_closest_plane(data, record);
 	find_closest_sphere(data, record);
 	find_closest_cylinder(data, record);
+	find_closest_cone(data, record);
 }
 
 t_color	trace_ray(t_ray ray, t_data *data)

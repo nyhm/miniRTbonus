@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 21:46:52 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/07 23:49:05 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:37:09 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static void	dispatch_parse(t_scene *scene, char **tokens)
 		parse_plane(scene, &tokens);
 	else if (ft_strcmp(tokens[0], "cy") == 0)
 		parse_cylinder(scene, &tokens);
+	else if (ft_strcmp(tokens[0], "co") == 0)
+		parse_cone(scene, &tokens);
 	else
 		ft_error("Error: invalid identifier\n");
 }
