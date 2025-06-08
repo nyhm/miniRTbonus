@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:59:07 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 03:29:35 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:24:29 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,27 @@ void		parse_cylinder(t_scene *scene, char ***tokens);
 
 static void	set_c_checker(t_cylinder *cy, char ***tokens)
 {
-	if ((*tokens)[6] && (ft_strcmp((*tokens)[6], "checkerboard") == 0
-			|| ft_strcmp((*tokens)[6], "checkerboard\n") == 0))
-		cy->checkerboard = 1;
-	else if ((*tokens)[6] && !ft_isspace((*tokens)[6][0]))
+	int	i;
+
+	cy->bump_map = 0;
+	cy->checkerboard = 0;
+	i = 6;
+	while (i <= 8 && (*tokens)[i])
 	{
-		ft_putstr_fd("Error: invalid texture identifier for cylinder: ", 2);
-		ft_putendl_fd((*tokens)[6], 2);
-		exit(EXIT_FAILURE);
+		if ((ft_strcmp((*tokens)[i], "bump_map") == 0 || \
+			ft_strcmp((*tokens)[i], "bump_map\n") == 0) && !cy->bump_map)
+			cy->bump_map = 1;
+		else if ((ft_strcmp((*tokens)[i], "checkerboard") == 0 || \
+			ft_strcmp((*tokens)[i], "checkerboard\n") == 0) && \
+			!cy->checkerboard)
+			cy->checkerboard = 1;
+		else if ((*tokens)[i] && !ft_isspace((*tokens)[i][0]))
+		{
+			ft_putstr_fd("Error: invalid texture identifier for cylinder: ", 2);
+			ft_putendl_fd((*tokens)[i], 2);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 }
 

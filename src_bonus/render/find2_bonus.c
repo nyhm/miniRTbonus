@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 09:57:12 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 09:58:26 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:26:20 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	set_plane(t_hit_record *record, double t_hit, t_data *data, int i)
 	record->color = pl->color;
 	if (pl->checkerboard)
 		record->color = get_checkerboard_color(record, pl, 0.5);
-	record->normal = apply_bump_map(record);
+	if (pl->bump_map)
+		record->normal = apply_bump_map(record);
 }
 
 void	find_closest_plane(t_data *data, t_hit_record *record)

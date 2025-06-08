@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:59:18 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 09:58:17 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:08:49 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef struct s_plane
 	t_vec3		normal;
 	t_color		color;
 	int			checkerboard;
+	int			bump_map;
 }				t_plane;
 /* ************************************************************************** */
 typedef struct s_ray
@@ -126,6 +127,7 @@ typedef struct s_cylinder
 	double		height;
 	t_color		color;
 	int			checkerboard;
+	int			bump_map;
 }				t_cylinder;
 /* ************************************************************************** */
 typedef struct s_quadratic
@@ -183,6 +185,7 @@ typedef struct s_sphere
 	double		radius;
 	t_color		color;
 	int			checkerboard;
+	int			bump_map;
 }				t_sphere;
 /* ************************************************************************** */
 typedef struct s_sphere_hit

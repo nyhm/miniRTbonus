@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 07:38:38 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 09:58:36 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:28:13 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	set_sphere(t_hit_record *record, double t_hit, t_data *data, int i)
 	record->hit_point = record->hit_point;
 	if (s->checkerboard)
 		record->color = get_sphere_checker_color(record, s, 3.0);
-	record->normal = apply_bump_map_sphere(record);
+	if (s->bump_map)
+		record->normal = apply_bump_map_sphere(record);
 }
 
 void	find_closest_sphere(t_data *data, t_hit_record *record)
@@ -73,7 +74,8 @@ static void	set_cylinder(t_hit_record *record, double t_hit, t_data *data,
 	record->normal = vec_normalize(vec_sub(cp, vec_mul(cy->direction, proj)));
 	if (cy->checkerboard)
 		record->color = get_cylinder_checker_color(record->hit_point, cy);
-	record->normal = apply_bump_map_cylinder(record, cy);
+	if (cy->bump_map)
+		record->normal = apply_bump_map_cylinder(record, cy);
 }
 
 void	find_closest_cylinder(t_data *data, t_hit_record *record)

@@ -6,7 +6,7 @@
 /*   By: hnagashi <hnagashi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:55:39 by hnagashi          #+#    #+#             */
-/*   Updated: 2025/06/08 03:29:14 by hnagashi         ###   ########.fr       */
+/*   Updated: 2025/06/08 10:24:00 by hnagashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,26 @@ void		parse_plane(t_scene *scene, char ***tokens);
 
 static void	set_p_checker(t_plane *p, char ***tokens)
 {
-	if ((*tokens)[4] && (ft_strcmp((*tokens)[4], "checkerboard") == 0
-			|| ft_strcmp((*tokens)[4], "checkerboard\n") == 0))
-		p->checkerboard = 1;
-	else if ((*tokens)[4] && !ft_isspace((*tokens)[4][0]))
+	int	i;
+
+	p->bump_map = 0;
+	p->checkerboard = 0;
+	i = 4;
+	while (i <= 6 && (*tokens)[i])
 	{
-		ft_putstr_fd("Error: invalid texture identifier for plane: ", 2);
-		ft_putendl_fd((*tokens)[4], 2);
-		exit(EXIT_FAILURE);
+		if ((ft_strcmp((*tokens)[i], "bump_map") == 0 || \
+			ft_strcmp((*tokens)[i], "bump_map\n") == 0) && !p->bump_map)
+			p->bump_map = 1;
+		else if ((ft_strcmp((*tokens)[i], "checkerboard") == 0 || \
+			ft_strcmp((*tokens)[i], "checkerboard\n") == 0) && !p->checkerboard)
+			p->checkerboard = 1;
+		else if ((*tokens)[i] && !ft_isspace((*tokens)[i][0]))
+		{
+			ft_putstr_fd("Error: invalid texture identifier for plane: ", 2);
+			ft_putendl_fd((*tokens)[i], 2);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
 }
 
